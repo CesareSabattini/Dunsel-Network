@@ -1,0 +1,42 @@
+const express= require('express');
+const mongoose=require('mongoose');
+const helmet=require('helmet');
+const morgan=require('morgan');
+require('dotenv').config();
+const bodyParser= require('body-parser');
+const userRoutes= require('./routes/user');
+const cors=require('cors');
+
+
+const app= express();
+
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({policy: 'cross-origin'}));
+app.use(morgan('common'));
+app.use(bodyParser.json({limit:'30mb', extended: true}));
+app.use(bodyParser.urlencoded({limit:'30mb', extended: true}));
+app.use(cors());
+
+app.use('/user',userRoutes);
+
+
+
+
+
+
+
+
+
+const PORT= process.env.PORT;
+const MONGO_URI= process.env.MONGO_URI;
+try{
+    mongoose.connect(MONGO_URI)
+    .then( app.listen(PORT, ()=>{
+        console.log('Mongo DB connected')
+        console.log(
+        `Server listening on port ${PORT}`)}))
+}
+
+catch(err){
+    console.log(err);
+}
