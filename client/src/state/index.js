@@ -19,7 +19,7 @@ const initialState = {
             state.user= null;
             state.token= null;
         },
-        setSearchedUser: (state)=>{
+        setSearchedUser: (state, action)=>{
           state.searchedUser= action.payload.searchedUser;
         }
     }

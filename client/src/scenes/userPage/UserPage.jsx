@@ -5,19 +5,13 @@ import cat from '../../assets/cat.jpeg'
 import {useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
- let searchedUser= null;
+
+
 const UserPage = () => {    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const params=useParams();
-   
-    
-const responseParams= axios.get(`http://localhost:3001/user/${params.userName}`).then((response)=>{
-  console.log(response);
- searchedUser= response.data[1]
- console.log(searchedUser);
-})
-
+    const searchedUser= useSelector((state)=>state.searchedUser)
 
     const posts= [cat,cat,cat];
   return (
@@ -29,10 +23,9 @@ grid grid-cols-6 grid-rows-4
     </div>
     <div  className='col-start-1 col-span-2 flex justify-center'>
     <div>
-      <button onClick={()=>{console.log(searchedUser.lastName)}}>user</button>
-        Firstname: {searchedUser}
+      Firstname:
         <br />
-        Lastname:
+        Lastname: {searchedUser.lastName}
         <br />
         Description:
         <br />
@@ -42,7 +35,7 @@ grid grid-cols-6 grid-rows-4
     </div>
     </div>
     <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl'>
-        
+    {searchedUser.userName}
     </div>
 <div className='grid grid-cols-3 col-span-3 gap-1'>
 <img src={posts[0]} alt="" />

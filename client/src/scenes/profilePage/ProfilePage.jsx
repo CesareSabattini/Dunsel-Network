@@ -6,6 +6,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import cat from '../../assets/cat.jpeg'
 import {useState} from 'react';
 import axios from 'axios';
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/icons-material/Menu';
 
 
 const ProfilePage = () => {
@@ -13,26 +15,31 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const searchedUser = useSelector((state) => state.searchedUser);
  
 
-  const [searchedUser, setMessage] = useState('');
+  const [inputUser, setMessage] = useState('');
 
   const handleChange = event => {
     setMessage(event.target.value);
 
-    console.log(searchedUser);
+    console.log(inputUser);
   };
+
+  
 
   const handleKeyDown = async event => {
   
     if (event.key === 'Enter') {
       event.preventDefault();
 
-      const res= await axios.get(`http://localhost:3001/user/${searchedUser}`)
+      const res= await axios.get(`http://localhost:3001/user/${inputUser}`)
 .then((response)=>{
   console.log(response.data);
-  
-  navigate(`/user/${response.data[1].userName}`) 
+   dispatch(
+    setSearchedUser({
+      searchedUser: response.data[0],
+    },  navigate(`/user/${inputUser}`) ))
 })
 
     }
@@ -65,7 +72,7 @@ grid grid-cols-6 grid-rows-4
         name="searchedUser"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={searchedUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info max-w-xs" />
+        value={inputUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info max-w-xs" />
     
     </div>
     </div>
@@ -84,8 +91,8 @@ grid grid-cols-6 grid-rows-4
 <img src={posts[0]} alt="" />
 </div>
 
-<div className="col-start-6 row-start-1 dropdown">
-  <div tabIndex={0} role="button" className="btn m-1 bg-black text-white hover:bg-white hover:text-black ">Click</div>
+<div className="col-start-6 row-start-1 dropdown pt-5 pl-5">
+  <div tabIndex={0} role="button" className="btn m-1 bg-black text-white hover:bg-white hover:text-black "><MenuIcon/></div>
   <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white text-black rounded-box w-30">
     <li><button onClick={() =>{dispatch(setLogout())
     navigate('/logIn')}}
