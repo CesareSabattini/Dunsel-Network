@@ -1,19 +1,24 @@
 import React from 'react'
-import { setLogout } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import cat from '../../assets/cat.jpeg'
 import {useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-
-const UserPage = () => {
-
-    
+import axios from 'axios';
+ let searchedUser= null;
+const UserPage = () => {    
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.searchedUser);
+    const params=useParams();
    
+    
+const responseParams= axios.get(`http://localhost:3001/user/${params.userName}`).then((response)=>{
+  console.log(response);
+ searchedUser= response.data[1]
+ console.log(searchedUser);
+})
+
+
     const posts= [cat,cat,cat];
   return (
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]
@@ -24,7 +29,8 @@ grid grid-cols-6 grid-rows-4
     </div>
     <div  className='col-start-1 col-span-2 flex justify-center'>
     <div>
-        Firstname: {user}
+      <button onClick={()=>{console.log(searchedUser.lastName)}}>user</button>
+        Firstname: {searchedUser}
         <br />
         Lastname:
         <br />
