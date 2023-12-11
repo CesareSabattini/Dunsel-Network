@@ -41,4 +41,16 @@ const logIn= async (req,res)=>{
             }
         }
 
-module.exports= {signIn, logIn};
+        const getUser= async (req, res)=>{
+            try{
+                const {userName}=req.params;
+                const user=await User.find({userName: userName});
+                res.status(200).json(user);
+            }
+            catch(err){
+res.status(404).json({message: err.message});
+            }
+
+        }
+
+module.exports= {signIn, logIn, getUser};

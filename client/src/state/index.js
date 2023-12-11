@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     token: null,
+    searchedUser: null,
     posts: [],
   };
 
@@ -18,10 +19,12 @@ const initialState = {
             state.user= null;
             state.token= null;
         },
-        
+        setSearchedUser: (state)=>{
+          state.searchedUser= action.payload.searchedUser;
+        }
     }
   })
 
   
-export const { setLogin, setLogout} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser} = authSlice.actions;
 export default authSlice.reducer;

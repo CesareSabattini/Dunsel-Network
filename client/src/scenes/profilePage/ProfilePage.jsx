@@ -1,19 +1,41 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "../../state/index";
+import { setLogout, setSearchedUser } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import cat from '../../assets/cat.jpeg'
-
+import {useState} from 'react';
+import axios from 'axios';
 
 
 const ProfilePage = () => {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const user = useSelector((state) => state.user);
-   
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+ 
 
+  const [searchedUser, setMessage] = useState('');
+
+  const handleChange = event => {
+    setMessage(event.target.value);
+
+    console.log(searchedUser);
+  };
+
+  const handleKeyDown = async event => {
+  
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      const res= await axios.get(`http://localhost:3001/user/${searchedUser}`);
+      ()=>{dispatch(setSearchedUser(res.user))};
+      navigate(`/user/${searchedUser}`);
+    
+    }
+  };
+
+  
 
     const posts= [cat,cat,cat];
   return (
@@ -34,6 +56,14 @@ grid grid-cols-6 grid-rows-4
         Followers:
         <br />
         Followed:
+        <br />
+        <input     
+        id="searchedUser"
+        name="searchedUser"
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        value={searchedUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info max-w-xs" />
+    
     </div>
     </div>
     <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl'>
