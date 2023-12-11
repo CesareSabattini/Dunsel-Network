@@ -50,7 +50,17 @@ grid grid-cols-6 grid-rows-4
 <img src={posts[0]} alt="" />
 <img src={posts[0]} alt="" />
 </div>
-  
+
+<div className="col-start-6 row-start-1 dropdown">
+  <div tabIndex={0} role="button" className="btn m-1 bg-black text-white hover:bg-white hover:text-black ">Click</div>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white text-black rounded-box w-30">
+    <li><button onClick={() =>{ dispatch(setLogout())
+    navigate('/logIn')}}
+    >Log out</button></li>
+    <li><button onClick={() =>{ 
+    navigate('/settings')}}>Settings</button></li>
+  </ul>
+</div>
 
 
     </div>
