@@ -22,7 +22,7 @@ const SignIn = () => {
         });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
   
         const userData = {
           firstName: data.firstName,
@@ -30,9 +30,8 @@ const SignIn = () => {
           userName: data.userName,
           password: data.password
 
-        };axios.post("http://localhost:3001/user/signIn", userData).then((response) => {
-            console.log(response.status, response.data.token);
-          });
+        };
+        const res= await axios.post("http://localhost:3001/user/signIn", userData)
           navigate('/');
         };
 

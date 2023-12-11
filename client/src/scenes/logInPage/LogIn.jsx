@@ -2,11 +2,16 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../state/index";
 
 
 const LogIn = () => {
   const navigate= useNavigate();
+  const dispatch = useDispatch();
+
+
   const [data, setData] = useState({
       userName:"",
       password:""
@@ -20,16 +25,30 @@ const LogIn = () => {
       });
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
       const userData = {
         userName: data.userName,
         password: data.password
 
-      };axios.post("http://localhost:3001/user/logIn", userData).then((response) => {
-          console.log(response.status, response.data.token);
+      };
+      axios.post("http://localhost:3001/user/logIn", userData).then((response) => {
+          console.log(response.data);
+          
+if(response.status==200){
+  dispatch(
+    setLogin({
+      user: response.data.user,
+      token: response.token,
+    })
+  );
+  navigate("/profilePage");}
+  else{
+    navigate('/')
+  }
         });
-        navigate('/');
+      
+        
       };
 
   

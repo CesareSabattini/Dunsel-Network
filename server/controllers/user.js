@@ -1,4 +1,4 @@
-const User= require('../models/User');
+const User= require('../models/User.js');
 const bcrypt= require('bcrypt');
 const jwt= require('jsonwebtoken');
 
@@ -15,7 +15,7 @@ const user= new User({
     password: passwordHash
 })
 const savedUser= await user.save().then(()=>console.log(user))
-res.status(201).json(savedUser);}
+res.status(201).json(user);}
 catch(err){
     console.log(err);
     res.status(500).json({error:err.message});
