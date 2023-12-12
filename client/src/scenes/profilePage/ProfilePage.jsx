@@ -7,7 +7,7 @@ import cat from '../../assets/cat.jpeg'
 import {useState} from 'react';
 import axios from 'axios';
 import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/icons-material/Menu';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 
 const ProfilePage = () => {
@@ -45,7 +45,10 @@ const ProfilePage = () => {
     }
   };
 
-  
+  const createPost= async event=>{
+    event.preventDefault();
+    navigate('/createPost');
+   }
 
     const posts= [cat,cat,cat];
   return (
@@ -91,6 +94,8 @@ grid grid-cols-6 grid-rows-4
 <img src={posts[0]} alt="" />
 </div>
 
+
+
 <div className="col-start-6 row-start-1 dropdown pt-5 pl-5">
   <div tabIndex={0} role="button" className="btn m-1 bg-black text-white hover:bg-white hover:text-black "><MenuIcon/></div>
   <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white text-black rounded-box w-30">
@@ -101,6 +106,9 @@ grid grid-cols-6 grid-rows-4
     navigate('/settings')}}>Settings</button></li>
   </ul>
 </div>
+<button className='pt-4 pl-5' onClick={createPost}>
+  <AddPhotoAlternateIcon />
+</button>
 
 
     </div>

@@ -5,6 +5,7 @@ const morgan=require('morgan');
 require('dotenv').config();
 const bodyParser= require('body-parser');
 const userRoutes= require('./routes/user');
+const postRoutes= require('./routes/post')
 const cors=require('cors');
 
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({limit:'30mb', extended: true}));
 app.use(cors());
 
 app.use('/user',userRoutes);
+app.use('/post', postRoutes);
 
 
 

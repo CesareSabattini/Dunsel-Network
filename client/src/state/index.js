@@ -21,10 +21,13 @@ const initialState = {
         },
         setSearchedUser: (state, action)=>{
           state.searchedUser= action.payload.searchedUser;
+        },
+        setPosts: (state, action)=>{
+         state.posts.push(action.payload.posts);
         }
     }
   })
 
   
-export const { setLogin, setLogout, setSearchedUser} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts} = authSlice.actions;
 export default authSlice.reducer;
