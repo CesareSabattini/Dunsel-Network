@@ -40,8 +40,10 @@ if(response.status==200){
     setLogin({
       user: response.data.user,
       token: response.token,
+      posts: response.data.posts
     })
   );
+  console.log( response.data.posts);
   navigate("/profilePage");}
   else{
     navigate('/')
@@ -82,7 +84,9 @@ initialValues={
   </Form>
 
 </Formik>
+<a href='/signIn' className='text-sky-500 flex justify-center pt-8 pb-0 text-sm hover:underline'>Don't have an account? Sign In</a>
 </div>
+
      </div>
       
       </div>

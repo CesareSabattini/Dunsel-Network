@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout, setSearchedUser } from "../../state/index";
+import { setLogout, setSearchedUser, setSearchedUserPosts } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import cat from '../../assets/cat.jpeg'
@@ -17,7 +17,8 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.user);
   const searchedUser = useSelector((state) => state.searchedUser);
  
-
+  const posts= useSelector((state)=>state.posts)
+  
   const [inputUser, setMessage] = useState('');
 
   const handleChange = event => {
@@ -31,16 +32,25 @@ const ProfilePage = () => {
   const handleKeyDown = async event => {
   
     if (event.key === 'Enter') {
+ 
       event.preventDefault();
 
+     
       const res= await axios.get(`http://localhost:3001/user/${inputUser}`)
 .then((response)=>{
   console.log(response.data);
+  dispatch(
+    setSearchedUserPosts({
+      searchedUserPosts: response.data.posts
+    })
+  )
    dispatch(
     setSearchedUser({
-      searchedUser: response.data[0],
+      searchedUser: response.data.user,
     },  navigate(`/user/${inputUser}`) ))
 })
+
+
 
     }
   };
@@ -50,7 +60,6 @@ const ProfilePage = () => {
     navigate('/createPost');
    }
 
-    const posts= [cat,cat,cat];
   return (
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]
 grid grid-cols-6 grid-rows-4
@@ -83,15 +92,10 @@ grid grid-cols-6 grid-rows-4
         {user.userName}
     </div>
 <div className='grid grid-cols-3 col-span-3 gap-1'>
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
-<img src={posts[0]} alt="" />
+  {posts.map(element => {
+    return <img key={element.url} src={element.url} className='flex items-center' />
+  })}
+
 </div>
 
 

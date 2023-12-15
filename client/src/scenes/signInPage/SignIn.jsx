@@ -32,7 +32,7 @@ const SignIn = () => {
 
         };
         const res= await axios.post("http://localhost:3001/user/signIn", userData)
-          navigate('/');
+          navigate('/logIn');
         };
 
     
@@ -69,6 +69,7 @@ initialValues={
   </Form>
 
 </Formik>
+<a href='/logIn' className='text-sky-500 flex justify-center pt-8 pb-0 text-sm hover:underline'>Do you have an account? Log In</a>
 </div>
      </div>
       

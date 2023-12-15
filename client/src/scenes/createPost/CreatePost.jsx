@@ -34,7 +34,7 @@ const postData={
 const res= await axios.post('http://localhost:3001/post/create', postData).then((response)=>{    
 console.log(response.data);
 
-    navigate(`/`)
+    navigate(`/profilePage`)
 })
 
     }

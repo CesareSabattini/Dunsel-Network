@@ -1,6 +1,7 @@
 const User= require('../models/User.js');
 const bcrypt= require('bcrypt');
 const jwt= require('jsonwebtoken');
+const { Post } = require('../models/Post.js');
 
 const signIn = async (req, res)=>{
     try{
@@ -26,6 +27,7 @@ const logIn= async (req,res)=>{
     try{
         const {userName, password}= req.body;
         const user= await User.findOne({userName:userName});
+        const posts= await Post.find({userName: userName});
         if(!user)return res.status(400).json({msg: 'User does not exist'});
         
         const isMatched= await bcrypt.compare(password, user.password);
@@ -33,7 +35,7 @@ const logIn= async (req,res)=>{
         
         const token= jwt.sign({id:user._id}, process.env.JWT_SECRET);
         delete user.password;
-        res.status(200).json({token, user});
+        res.status(200).json({token, user, posts});
         
             }
             catch(err){
@@ -45,7 +47,8 @@ const logIn= async (req,res)=>{
             try{
                 const {userName}=req.params;
                 const user=await User.find({userName: userName});
-                res.status(200).json(user);
+                const posts= await Post.find({userName: userName});
+                res.status(200).json({user, posts});
             }
             catch(err){
 res.status(404).json({message: err.message});

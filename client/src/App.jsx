@@ -13,7 +13,6 @@ const App = () => {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={ isAuth? <ProfilePage/> : <LogIn/>}></Route>
       <Route path='/signIn' element={<SignIn/>}></Route>
       <Route path='/logIn' element={<LogIn/>}></Route>
       <Route path='/profilePage' element={isAuth? <ProfilePage/> : <Navigate to='/'/>}></Route>
