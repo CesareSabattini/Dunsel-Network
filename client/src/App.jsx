@@ -7,6 +7,7 @@ import Settings from './scenes/profileSettings/Settings';
 import UserPage from './scenes/userPage/UserPage';
 import CreatePost from './scenes/createPost/CreatePost';
 import NullUser from './scenes/nullUser/NullUser';
+import LandingPage from './scenes/landingPage/LandingPage';
 
 const App = () => {
   const isAuth= Boolean((state)=>state.token);
@@ -14,6 +15,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <Routes>
+      <Route path='/' element={<LandingPage/>}></Route>
       <Route path='/signIn' element={<SignIn/>}></Route>
       <Route path='/logIn' element={<LogIn/>}></Route>
       <Route path='/profilePage' element={isAuth? <ProfilePage/> : <Navigate to='/'/>}></Route>

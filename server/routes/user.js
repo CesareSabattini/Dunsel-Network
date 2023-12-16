@@ -1,6 +1,6 @@
 const express= require('express');
 const router= express.Router();
-const {signIn, logIn, getUser}= require('../controllers/user')
+const {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto}= require('../controllers/user')
 const {verifyToken}= require('../middleware/auth')
 
 
@@ -10,7 +10,11 @@ router.post('/signIn',(req, res)=>{
 
 router.post('/logIn',logIn);
 
-router.get('/:userName', getUser)
+router.get('/:userName', getUser);
+
+router.post('/setProfilePhoto', setProfilePhoto);
+
+router.get('/getProfilePhoto', getProfilePhoto);
 
 
 

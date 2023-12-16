@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setSearchedUser, setSearchedUserPosts } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import cat from '../../assets/cat.jpeg'
 import {useState} from 'react';
 import axios from 'axios';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-
+import ProfileImage from '../../components/ProfileImage'
 
 const ProfilePage = () => {
 
@@ -16,7 +15,8 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const searchedUser = useSelector((state) => state.searchedUser);
- 
+ const profilePhoto= useSelector((state)=>state.profilePhoto);
+
   const posts= useSelector((state)=>state.posts)
   
   const [inputUser, setMessage] = useState('');
@@ -50,8 +50,6 @@ const ProfilePage = () => {
     },  navigate(`/user/${inputUser}`) ))
 })
 
-
-
     }
   };
 
@@ -65,7 +63,7 @@ const ProfilePage = () => {
 grid grid-cols-6 grid-rows-4
 '>
     <div className='flex justify-center items-center col-start-1 col-span-2'>
-<AccountCircleIcon  sx={{ fontSize: '20vh' }}/>
+<ProfileImage  sx={{ fontSize: '20vh' }}/>
     </div>
     <div  className='col-start-1 col-span-2 flex justify-center'>
     <div>

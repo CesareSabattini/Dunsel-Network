@@ -13,6 +13,7 @@ const user= new User({
     firstName: req.firstName,
     lastName: req.lastName,
     userName: req.userName,
+    profilePhoto: '',
     password: passwordHash
 })
 const savedUser= await user.save().then(()=>console.log(user))
@@ -56,4 +57,31 @@ res.status(200).json({});
 
         }
 
-module.exports= {signIn, logIn, getUser};
+
+    const setProfilePhoto= async (req, res)=>{
+    try{
+    const {userName, url}= req.body;
+    const user= await User.findOneAndUpdate({userName: userName}, {profilePhoto: url}, {returnOriginal: true}).then((user)=>{
+    });
+    
+    }
+    catch(err){
+        res.status(200).json({});
+    }
+        }
+        
+    const getProfilePhoto= async (req, res)=>{
+        try{
+
+        const {userName}= req.body;
+        const user= await User.findOne({userName: userName}).then((response)=>{
+            res.status(201).json(response.profilePhoto);
+        })
+    }
+        catch(err){
+            res.status(200).json({});
+        }
+    }
+                
+
+module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto};

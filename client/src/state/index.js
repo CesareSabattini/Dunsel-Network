@@ -20,6 +20,7 @@ const initialState = {
     searchedUser: null,
     searchedUserPosts: Array(),
     posts: Array(),
+    profilePhoto:''
   };
 
   export const authSlice= createSlice({
@@ -35,7 +36,8 @@ const initialState = {
         setLogout: (state)=>{
             state.user= null;
             state.token= null;
-            state.posts=[]
+            state.posts=[];
+            state.profilePhoto=null;
         },
         setSearchedUser: (state, action)=>{
           state.searchedUser= action.payload.searchedUser;
@@ -50,10 +52,13 @@ const initialState = {
           const post= new Post(action.payload.username, action.payload.url, action.payload.description);
 
          state.posts.push(post);
+        },
+        setProfilePhoto: (state, action)=>{
+          state.profilePhoto=action.payload.profilePhoto;
         }
     }
   })
 
   
-export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto} = authSlice.actions;
 export default authSlice.reducer;

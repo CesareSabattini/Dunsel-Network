@@ -29,5 +29,6 @@ res.status(201).json(posts);
             res.status(409).json({message: err.message})
          }
     }
-    
+
+   
     module.exports= {createPost, getPosts};
