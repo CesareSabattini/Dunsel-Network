@@ -88,13 +88,15 @@ grid grid-cols-6 grid-rows-4
     
     </div>
     </div>
-    <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl'>
+    <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl '>
         {user.userName}
     </div>
-<div className='grid grid-cols-3 col-span-3 gap-1'>
-  {posts.map(element => {
-    return <img key={element.url} src={element.url} className='flex items-center' />
+<div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-sky-500 rounded'>
+<div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
+{posts.map(element => {
+    return <div className='border rounded-xl border-sky-500'><img key={element._id} src={`./src/assets/${element.url}`} className='flex items-center rounded-xl' /></div>
   })}
+ </div>
 
 </div>
 

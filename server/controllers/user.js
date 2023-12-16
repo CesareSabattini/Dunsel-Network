@@ -51,7 +51,7 @@ const logIn= async (req,res)=>{
                 res.status(200).json({user, posts});
             }
             catch(err){
-res.status(404).json({message: err.message});
+res.status(200).json({});
             }
 
         }

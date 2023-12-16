@@ -6,10 +6,11 @@ import ProfilePage from './scenes/profilePage/ProfilePage';
 import Settings from './scenes/profileSettings/Settings';
 import UserPage from './scenes/userPage/UserPage';
 import CreatePost from './scenes/createPost/CreatePost';
-
+import NullUser from './scenes/nullUser/NullUser';
 
 const App = () => {
   const isAuth= Boolean((state)=>state.token);
+  
   return (
     <BrowserRouter>
     <Routes>
@@ -20,6 +21,7 @@ const App = () => {
       <Route path='/settings' element={<Settings/>}></Route>
       <Route path='/user/:userName' element={<UserPage/>}></Route>
       <Route path='/createPost' element={<CreatePost/>}></Route>
+      <Route path='/nullUser' element={<NullUser/>}></Route>
     </Routes>
     </BrowserRouter>
   )
