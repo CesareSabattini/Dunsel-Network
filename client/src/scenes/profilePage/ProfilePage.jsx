@@ -8,6 +8,7 @@ import axios from 'axios';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ProfileImage from '../../components/ProfileImage'
+import HomeIcon from '@mui/icons-material/Home';
 
 const ProfilePage = () => {
 
@@ -56,6 +57,11 @@ const ProfilePage = () => {
   const createPost= async event=>{
     event.preventDefault();
     navigate('/createPost');
+   }
+
+   const navigateHome= async event=>{
+    event.preventDefault();
+    navigate('/home');
    }
 
   return (
@@ -110,8 +116,11 @@ grid grid-cols-6 grid-rows-4
     navigate('/settings')}}>Settings</button></li>
   </ul>
 </div>
-<button className='pt-4 pl-5' onClick={createPost}>
+<button className='pt-4 ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
   <AddPhotoAlternateIcon />
+</button>
+<button className=' ml-5 h-[10vh] w-[10vh] col-start-6 row-start-' onClick={navigateHome}>
+  <HomeIcon/>
 </button>
 
 

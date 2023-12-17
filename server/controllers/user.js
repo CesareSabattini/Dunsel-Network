@@ -14,7 +14,9 @@ const user= new User({
     lastName: req.lastName,
     userName: req.userName,
     profilePhoto: '',
-    password: passwordHash
+    password: passwordHash,
+    followers:[],
+    followed:[]
 })
 const savedUser= await user.save().then(()=>console.log(user))
 res.status(201).json(user);}
@@ -84,4 +86,19 @@ res.status(200).json({});
     }
                 
 
-module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto};
+    const addFollower= async (req, res)=>{
+try{
+const {userName, followerName}= req.body;
+const user= await User.findOneAndUpdate({userName: userName}, {followers: followerName}, {returnOriginal: true}).then((user)=>{
+    res.status(201).json(response.followers);
+});
+
+
+}
+catch(err){
+    res.status(200).json({});
+
+}
+    }
+
+module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollower};

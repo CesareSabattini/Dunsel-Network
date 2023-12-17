@@ -17,6 +17,12 @@ const UserSchema= new mongoose.Schema({
         type: String,
         require: true
     },
+    followers:{
+        type: Array
+    },
+    followed:{
+        type: Array
+    },
     profilePhoto:{
         type: String
     }

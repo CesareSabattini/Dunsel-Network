@@ -6,12 +6,14 @@ import {useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import axios from 'axios';
 
 const UserPage = () => {    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const params=useParams();
     const searchedUser= useSelector((state)=>state.searchedUser)
+const user= useSelector((state)=>state.user)
 
     const posts= useSelector((state)=>state.searchedUserPosts)
    
@@ -20,6 +22,17 @@ const UserPage = () => {
       navigate('/profilePage');
      }
   
+     const addFollower= async ()=>{
+      const reqData={
+        userName: searchedUser,
+        followerName: user.userName
+      }
+
+     axios.post('http://localhost:3001/user/addFollower', reqData).then((response)=>console.log(response))
+
+     }
+
+
   return (
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]
 grid grid-cols-6 grid-rows-4
@@ -39,7 +52,7 @@ grid grid-cols-6 grid-rows-4
         <br />
         Followed:
         <br />
-        <button className='hover:text-sky-500 delay-75 pl-5 border-2 flex pt-3 pb-3 pr-5 rounded-xl mt-8 bg-black border-sky-500'>
+        <button className='hover:text-sky-500 delay-75 pl-5 border-2 flex pt-3 pb-3 pr-5 rounded-xl mt-8 bg-black border-sky-500' onClick={addFollower}>
            <PersonAddIcon className=''/></button>
     </div>
     </div>
