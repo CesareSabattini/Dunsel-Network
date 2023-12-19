@@ -16,7 +16,8 @@ const user= new User({
     profilePhoto: '',
     password: passwordHash,
     followers:[],
-    followed:[]
+    followed:[],
+    communities:[]
 })
 const savedUser= await user.save().then(()=>console.log(user))
 res.status(201).json(user);}

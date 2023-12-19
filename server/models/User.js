@@ -25,6 +25,9 @@ const UserSchema= new mongoose.Schema({
     },
     profilePhoto:{
         type: String
+    },
+    communities:{
+        type: Array 
     }
     
 }, {timestamps: true});

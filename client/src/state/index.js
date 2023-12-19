@@ -14,13 +14,15 @@ this.description=description;
   description;
 }
 
+
 const initialState = {
     user: null,
     token: null,
     searchedUser: null,
     searchedUserPosts: Array(),
     posts: Array(),
-    profilePhoto:''
+    profilePhoto:'',
+    communities:[],
   };
 
   export const authSlice= createSlice({
@@ -55,10 +57,13 @@ const initialState = {
         },
         setProfilePhoto: (state, action)=>{
           state.profilePhoto=action.payload.profilePhoto;
+        },
+        setCommunities: (state, action)=>{
+          state.communities.push(action.payload.community);
         }
     }
   })
 
   
-export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setCommunities} = authSlice.actions;
 export default authSlice.reducer;

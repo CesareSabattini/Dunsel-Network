@@ -5,7 +5,8 @@ const morgan=require('morgan');
 require('dotenv').config();
 const bodyParser= require('body-parser');
 const userRoutes= require('./routes/user');
-const postRoutes= require('./routes/post')
+const postRoutes= require('./routes/post');
+const communityRoutes= require('./routes/community')
 const cors=require('cors');
 
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use('/user',userRoutes);
 app.use('/post', postRoutes);
+app.use('/community', communityRoutes);
 
 
 

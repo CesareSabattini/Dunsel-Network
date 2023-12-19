@@ -81,6 +81,10 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
      navigate('/profilePage')
     };
+
+    const handleCreateCommunity= ()=>{
+      navigate('/community/create')
+    }
   
     return (
         <Box sx={{ flexGrow: 1 }}  className='bg-black shadow-xl shadow-sky-500' >
@@ -143,6 +147,9 @@ function ResponsiveAppBar() {
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
+                    <MenuItem key={''} onClick={handleCreateCommunity}>
+                      <Typography textAlign="center">Create Community</Typography>
+                    </MenuItem>
                 </Menu>
               </Box>
             </Toolbar>

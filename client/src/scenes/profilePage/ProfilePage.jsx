@@ -65,13 +65,13 @@ const ProfilePage = () => {
    }
 
   return (
-<div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]
+<div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[100vh]
 grid grid-cols-6 grid-rows-4
 '>
     <div className='flex justify-center items-center col-start-1 col-span-2'>
 <ProfileImage  sx={{ fontSize: '20vh' }}/>
     </div>
-    <div  className='col-start-1 col-span-2 flex justify-center'>
+    <div  className='col-start-1 col-span-2 flex justify-center rounded-lg items-center font-mono m-4 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100'>
     <div>
         Firstname: {user.firstName}
         <br />
@@ -83,22 +83,23 @@ grid grid-cols-6 grid-rows-4
         <br />
         Followed:
         <br />
-        <input     
+
+    </div>
+    </div>
+    <input     
         id="searchedUser"
         name="searchedUser"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={inputUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info max-w-xs" />
+        value={inputUser} type="text" placeholder="Search User" className="input mt-5 col-start-1 row-start-3 col-span-2 bg-black input-bordered input-info m-4 max-w-xs" />
     
-    </div>
-    </div>
     <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl '>
         {user.userName}
     </div>
-<div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-sky-500 rounded'>
+<div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-stone-200 border-b-2 rounded'>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-sky-500'><img key={element._id} src={`./src/assets/${element.url}`} className='flex items-center rounded-xl' /></div>
+    return <div className='border rounded-xl border-stone-200'><img key={element._id} src={`./src/assets/${element.url}`} className='flex items-center rounded-xl' /></div>
   })}
  </div>
 
