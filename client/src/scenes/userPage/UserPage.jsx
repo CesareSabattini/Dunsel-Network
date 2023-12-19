@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import axios from 'axios';
+import { setFollowed } from '../../state/index';
 
 const UserPage = () => {    
     const navigate = useNavigate();
@@ -22,13 +23,24 @@ const user= useSelector((state)=>state.user)
       navigate('/profilePage');
      }
   
-     const addFollower= async ()=>{
+     const addFollowed= async ()=>{
       const reqData={
-        userName: searchedUser,
-        followerName: user.userName
+        userName: user.userName,
+        followedName: searchedUser[0].userName
       }
 
-     axios.post('http://localhost:3001/user/addFollower', reqData).then((response)=>console.log(response))
+     axios.post('http://localhost:3001/user/addFollowed', reqData).then((response)=>{
+      
+    if(response.data==='Already Following'){
+      console.log(response);
+    }
+    else{setFollowed({
+      followed: response.followed,
+      followers: response.followers
+    })
+  
+  console.log(user.followed)}
+    })
 
      }
 
@@ -38,7 +50,7 @@ const user= useSelector((state)=>state.user)
 grid grid-cols-6 grid-rows-4
 '>
     <div className='flex justify-center items-center col-start-1 col-span-2'>
-<AccountCircleIcon  sx={{ fontSize: '20vh' }}/>
+<img className=' rounded-full w-[20vh]' src={`../src/assets/background/${searchedUser[0].profilePhoto}`}/>
     </div>
     <div  className='col-start-1 col-span-2 flex justify-center'>
     <div>
@@ -46,13 +58,13 @@ grid grid-cols-6 grid-rows-4
         <br />
         Lastname: {searchedUser[0].lastName}
         <br />
-        Description:
+        Description: {searchedUser[0].description}
         <br />
         Followers:
         <br />
         Followed:
         <br />
-        <button className='hover:text-sky-500 delay-75 pl-5 border-2 flex pt-3 pb-3 pr-5 rounded-xl mt-8 bg-black border-sky-500' onClick={addFollower}>
+        <button className='hover:text-sky-500 delay-75 pl-5 border-2 flex pt-3 pb-3 pr-5 rounded-xl mt-8 bg-black border-sky-500' onClick={addFollowed}>
            <PersonAddIcon className=''/></button>
     </div>
     </div>
@@ -63,7 +75,7 @@ grid grid-cols-6 grid-rows-4
     <div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-sky-500 rounded'>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-sky-500'><img key={element.id} src={`../src/assets/${element.url}`} className='flex items-center rounded-xl' /></div>
+    return <div className='border rounded-xl border-sky-500'><img key={element.id} src={`../src/assets/background/${element.url}`} className='flex items-center rounded-xl' /></div>
   })}
  </div>
 

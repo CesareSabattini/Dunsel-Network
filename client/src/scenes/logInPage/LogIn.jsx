@@ -40,7 +40,8 @@ if(response.status==200){
     setLogin({
       user: response.data.user,
       token: response.token,
-      posts: response.data.posts
+      posts: response.data.posts,
+      profilePhoto: response.data.user.profilePhoto
     })
   );
   console.log( response.data.posts);

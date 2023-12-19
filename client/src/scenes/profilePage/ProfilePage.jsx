@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const description= useSelector((state)=>state.description);
   const searchedUser = useSelector((state) => state.searchedUser);
  const profilePhoto= useSelector((state)=>state.profilePhoto);
 
@@ -57,6 +58,7 @@ const ProfilePage = () => {
   const createPost= async event=>{
     event.preventDefault();
     navigate('/createPost');
+    console.log(user.followed);
    }
 
    const navigateHome= async event=>{
@@ -77,11 +79,11 @@ grid grid-cols-6 grid-rows-4
         <br />
         Lastname: {user.lastName}
         <br />
-        Description:
+        Description: {description}
         <br />
-        Followers:
+        Followers: {user.followers.length}
         <br />
-        Followed:
+        Followed: {user.followed.length}
         <br />
 
     </div>
@@ -99,7 +101,7 @@ grid grid-cols-6 grid-rows-4
 <div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-stone-200 border-b-2 rounded'>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-stone-200'><img key={element._id} src={`./src/assets/${element.url}`} className='flex items-center rounded-xl' /></div>
+    return <div className='border rounded-xl border-stone-200'><img key={element._id} src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl' /></div>
   })}
  </div>
 

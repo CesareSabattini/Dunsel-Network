@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import Avatar from '@mui/material/Avatar';
+import PeopleIcon from '@mui/icons-material/People';
 import { useSelector } from 'react-redux';
 
-const CommunityPreview = () => {
+const CommunityPreview = ({communityName, communityImage}) => {
     const profilePhoto= useSelector((state)=>state.profilePhoto)
   return (
     <span className='flex items-center pl-3 border-y text-lg  border-sky-500'>
-<Avatar src={`./src/assets/background/${profilePhoto}`} className='mr-2'/>
-Community number 1
+<PeopleIcon src={`./src/assets/background/${communityImage}`} className='mr-2'/>
+{communityName}
     </span>
   )
 }

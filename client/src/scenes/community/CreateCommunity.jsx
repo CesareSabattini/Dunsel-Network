@@ -19,16 +19,16 @@ const CreateCommunity = () => {
       
     const navigateBack= async event=>{
       event.preventDefault();
-      navigate('/homePage');
+      navigate('/home');
      }
   
 
     const handleSubmit= async()=>{
         dispatch(
             setCommunities({
-            userName: user.userName,
-            url: data.url,
-            description: data.description}));
+              communityName: data.communityName,
+              communityTheme: data.communityTheme,
+              communityDescription: data.communityDescription}));
 
 const communityData={
     userName: user.userName,
@@ -40,7 +40,7 @@ const communityData={
 const res= await axios.post('http://localhost:3001/community/create', communityData).then((response)=>{    
 console.log(response.data);
 
-    navigate(`/homePage`)
+    navigate(`/home`)
 })
 
     }

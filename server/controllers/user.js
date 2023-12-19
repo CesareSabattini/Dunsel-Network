@@ -87,19 +87,49 @@ res.status(200).json({});
     }
                 
 
-    const addFollower= async (req, res)=>{
+    const addFollowed= async (req, res)=>{
 try{
-const {userName, followerName}= req.body;
-const user= await User.findOneAndUpdate({userName: userName}, {followers: followerName}, {returnOriginal: true}).then((user)=>{
-    res.status(201).json(response.followers);
+const {userName, followedName}= req.body;
+
+const follower= await User.findOne({userName: userName});
+const followed= await User.findOne({userName: followedName});
+
+if(follower.followed.includes(followed.userName)){
+    console.log(followed.userName);
+    return res.status(201).json('Already following');
+}
+else{
+
+
+const followerUser=await User.findOneAndUpdate({userName: userName}, {$push:{followed: followedName}}, {returnOriginal: true}).then((followerUser)=>console.log(followerUser));
+const followedUser= await User.findOneAndUpdate({userName: followedName}, {$push:{followers: userName}}, {returnOriginal: true}).then((followedUser)=>{
+    
+    
+    res.status(201).json(response);
 });
 
 
-}
+}}
 catch(err){
     res.status(200).json({});
 
 }
     }
 
-module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollower};
+    
+
+    
+
+const updateDescription= (req, res)=>{
+    try{
+    const {userName, description}= req.body;
+    User.findOneAndUpdate({userName: userName}, {description: description}, {returnOriginal: true}).then((response)=>{
+        res.status(201).json(response);
+    });
+}
+catch(err){
+    res.status(200).json({});
+}
+}
+
+module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription};

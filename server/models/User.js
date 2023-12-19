@@ -28,6 +28,9 @@ const UserSchema= new mongoose.Schema({
     },
     communities:{
         type: Array 
+    },
+    description:{
+        type: String
     }
     
 }, {timestamps: true});

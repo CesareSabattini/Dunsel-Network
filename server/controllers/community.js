@@ -13,7 +13,7 @@ const createCommunity= async (req, res)=>{
         });
 
         const savedCommunity= await newCommunity.save().then(()=>console.log(newCommunity))
-        const user= await User.findOneAndUpdate({userName: req.body.userName}, {communities: communities.push(newCommunity)}, {returnOriginal: true}).then((user)=>{
+        const user= await User.findOneAndUpdate({userName: req.body.userName}, {$push:{communities:newCommunity}}, {returnOriginal: true}).then((user)=>{
         })
         res.status(201).json(newCommunity);
 

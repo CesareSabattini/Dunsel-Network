@@ -7,8 +7,15 @@ import { setLogout, setSearchedUser, setSearchedUserPosts } from "../../state/in
 
 const HomePage = () => {
 
+  
   const communities=useSelector((state)=>state.communities);
+  const posts=useSelector((state)=>state.posts);
+  
+  const handleClick= (event)=>{
+    event.preventDefault();
+    console.log(communities)
 
+  }
   return (
     <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]'>
         <Navbar/>
@@ -16,10 +23,12 @@ const HomePage = () => {
         <div className='font-mono text-white border-r flex grid grid-rows-6 border-sky-500'>
 <span className='font-mono font-bold text-xl flex justify-center items-center w-full h-full w-full  bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-t border-sky-500 '>
     My Communities</span>
-    {communities.map(()=>{
-      return (<CommunityPreview/>)
+    {communities.map((elem)=>{
+      return (<CommunityPreview communityName={elem.communityName}/>)
 
     })}
+
+    
 
 
    <a href='https://github.com/CesareSabattini' className='flex justify-center items-center h-full w-full bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 '> <GitHubIcon className='mr-2'/> @CesareSabattini </a>

@@ -1,6 +1,6 @@
 const express= require('express');
 const router= express.Router();
-const {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollower}= require('../controllers/user')
+const {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription}= require('../controllers/user')
 const {verifyToken}= require('../middleware/auth')
 
 
@@ -16,8 +16,9 @@ router.post('/setProfilePhoto', setProfilePhoto);
 
 router.get('/getProfilePhoto', getProfilePhoto);
 
-router.post('/addFollower', addFollower);
+router.post('/addFollowed', addFollowed);
 
+router.post('/description/update', updateDescription)
 
 
 module.exports= router;

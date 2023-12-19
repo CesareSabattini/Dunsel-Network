@@ -15,14 +15,27 @@ this.description=description;
 }
 
 
+class Community{
+  constructor(communityName,communityTheme, communityDescription){
+this.communityName=communityName;
+this.communityTheme=communityTheme;
+this.communityDescription=communityDescription;
+  }
+
+  communityName;
+  communityTheme;
+  communityDescription;
+}
+
 const initialState = {
     user: null,
     token: null,
     searchedUser: null,
+    description: '',
     searchedUserPosts: Array(),
     posts: Array(),
     profilePhoto:'',
-    communities:[],
+    communities: Array(),
   };
 
   export const authSlice= createSlice({
@@ -32,7 +45,8 @@ const initialState = {
         setLogin: (state, action)=>{
             state.user= action.payload.user;
             state.token= action.payload.token;
-            state.posts= action.payload.posts
+            state.posts= action.payload.posts;
+            state.profilePhoto= action.payload.profilePhoto;
           
         },
         setLogout: (state)=>{
@@ -40,6 +54,10 @@ const initialState = {
             state.token= null;
             state.posts=[];
             state.profilePhoto=null;
+            state.communities=Array();
+            state.description='';
+            state.searchedUser= null;
+            state.searchedUserPosts= Array();
         },
         setSearchedUser: (state, action)=>{
           state.searchedUser= action.payload.searchedUser;
@@ -59,11 +77,21 @@ const initialState = {
           state.profilePhoto=action.payload.profilePhoto;
         },
         setCommunities: (state, action)=>{
-          state.communities.push(action.payload.community);
+          const newCommunity= new Community(action.payload.communityName, action.payload.communityTheme, action.payload.communityDescription);
+          state.communities.push(newCommunity);
+        },
+        setDescription: (state, action)=>{
+          state.description= action.payload.description;
+        },
+        setFollowers: (state, action)=>{
+          state.user.followers= action.payload.followers;
+        },
+        setFollowed: (state, action)=>{
+          state.user.followed= action.payload.followed;
         }
     }
   })
 
   
-export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setCommunities} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setCommunities, setDescription, setFollowed, setFollowers} = authSlice.actions;
 export default authSlice.reducer;
