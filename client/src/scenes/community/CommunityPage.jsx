@@ -1,8 +1,40 @@
 import React from 'react'
+import Navbar  from '../../components/Navbar';
+import CommunityPost from '../../components/CommunityPost';
+import { useParams } from 'react-router-dom';
 
-const CommunityPage = () => {
+const CommunityPage = ({location}) => {
+  let {communityName}= useParams();
   return (
-    <div>CommunityPage</div>
+    <div className=' bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]'>
+     <Navbar/>
+<div className='grid grid-cols-4 divide-x'>
+  <div className='h-[90vh]'>
+    
+    </div>
+  <div className='col-start-2 col-span-3 h-[90vh]'>
+    
+    <div className='flex justify-center mx-[40vh] my-10 text-3xl font-bold font-mono'>
+  {communityName}
+      </div>
+    
+    <div className='grid grid-cols-2 border-b'>
+    <div className='text-center'>
+      Members:
+    </div>
+    <div className='text-center'>
+      Posts:
+    </div>
+    </div>
+    <div className='h-[70vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
+<CommunityPost/>
+<CommunityPost/>
+</div>
+    </div>
+
+</div>
+
+    </div>
   )
 }
 

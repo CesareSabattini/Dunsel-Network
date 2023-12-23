@@ -15,17 +15,7 @@ this.description=description;
 }
 
 
-class Community{
-  constructor(communityName,communityTheme, communityDescription){
-this.communityName=communityName;
-this.communityTheme=communityTheme;
-this.communityDescription=communityDescription;
-  }
 
-  communityName;
-  communityTheme;
-  communityDescription;
-}
 
 const initialState = {
     user: null,
@@ -76,10 +66,6 @@ const initialState = {
         setProfilePhoto: (state, action)=>{
           state.profilePhoto=action.payload.profilePhoto;
         },
-        setCommunities: (state, action)=>{
-          const newCommunity= new Community(action.payload.communityName, action.payload.communityTheme, action.payload.communityDescription);
-          state.communities.push(newCommunity);
-        },
         setDescription: (state, action)=>{
           state.description= action.payload.description;
         },
@@ -93,5 +79,5 @@ const initialState = {
   })
 
   
-export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setCommunities, setDescription, setFollowed, setFollowers} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setDescription, setFollowed, setFollowers} = authSlice.actions;
 export default authSlice.reducer;

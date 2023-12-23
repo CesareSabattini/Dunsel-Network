@@ -10,6 +10,7 @@ import NullUser from './scenes/nullUser/NullUser';
 import LandingPage from './scenes/landingPage/LandingPage';
 import HomePage from './scenes/homepage/HomePage';
 import CreateCommunity from './scenes/community/createCommunity';
+import CommunityPage from './scenes/community/CommunityPage';
 
 const App = () => {
   const isAuth= Boolean((state)=>state.token);
@@ -28,6 +29,8 @@ const App = () => {
       <Route path='/createPost' element={<CreatePost/>}></Route>
       <Route path='/nullUser' element={<NullUser/>}></Route>
       <Route path='community/create' element={<CreateCommunity/>}></Route>
+      <Route path='community/:communityName' element={<CommunityPage/>}></Route>
+   
     </Routes>
     </BrowserRouter>
   )

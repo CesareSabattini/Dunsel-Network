@@ -4,18 +4,35 @@ import CommunityPreview from '../../components/CommunityPreview'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setSearchedUser, setSearchedUserPosts } from "../../state/index";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const HomePage = () => {
 
   
-  const communities=useSelector((state)=>state.communities);
+  const user=useSelector((state)=>state.user);
   const posts=useSelector((state)=>state.posts);
-  
+  const navigate= useNavigate();
   const handleClick= (event)=>{
     event.preventDefault();
     console.log(communities)
 
   }
+
+  const handleSearchCommunity= async (elem)=>{
+  const communityData={
+    communityName: elem.communityName
+  }
+
+    const res= await axios.get(`http://localhost:3001/community/get`,communityData)
+    .then((response)=>{
+      console.log(response);
+      
+    })
+    
+        }
+      
+
   return (
     <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]'>
         <Navbar/>
@@ -23,8 +40,13 @@ const HomePage = () => {
         <div className='font-mono text-white border-r flex grid grid-rows-6 border-sky-500'>
 <span className='font-mono font-bold text-xl flex justify-center items-center w-full h-full w-full  bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-t border-sky-500 '>
     My Communities</span>
-    {communities.map((elem)=>{
-      return (<CommunityPreview communityName={elem.communityName}/>)
+    {user.communities.map((elem)=>{
+      return (<div onClick={(event)=>{
+        event.preventDefault();
+        console.log(elem);
+        handleSearchCommunity(elem);
+        navigate(`/community/${elem.communityName}`);
+      }}><CommunityPreview communityName={elem.communityName}/></div>)
 
     })}
 

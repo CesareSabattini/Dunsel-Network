@@ -6,7 +6,7 @@ router.post('/create', createCommunity);
 
 router.get('/getCommunities', getCommunities);
 
-router.get('/community', getCommunity);
+router.get('/get', getCommunity);
 
 router.post('/addTo', addToCommunity);
 

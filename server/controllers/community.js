@@ -31,7 +31,7 @@ const user= await User.findOne({userName:userName}).then((response)=>{
     res.status(201).json(response);
 });}
 catch(err){
-        res.status(200).json({});
+        res.status(401).json({});
 }
 
 }
@@ -39,12 +39,14 @@ catch(err){
 const getCommunity= async (req, res)=>{
     try{
     const communityName= req.body.communityName;
-    const community=Community.findOne({communityName:communityName}).then((response)=>{
-        res.status(201).json(response);
+    const community= await Community.findOne({communityName:communityName}).then((response)=>{
+       console.log(response);
+       res.status(201).json(response);
     });
+   
 }
 catch(err){
-    res.status(200).json({});
+    res.status(400).json({});
 }
 
 }

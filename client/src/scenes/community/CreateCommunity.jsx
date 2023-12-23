@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { setCommunities } from '../../state/index';
 import { Formik, Form } from 'formik';
 import { Field } from 'formik';
 import axios from 'axios';
@@ -24,11 +23,7 @@ const CreateCommunity = () => {
   
 
     const handleSubmit= async()=>{
-        dispatch(
-            setCommunities({
-              communityName: data.communityName,
-              communityTheme: data.communityTheme,
-              communityDescription: data.communityDescription}));
+
 
 const communityData={
     userName: user.userName,
