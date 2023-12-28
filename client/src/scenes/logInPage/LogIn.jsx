@@ -32,6 +32,7 @@ const LogIn = () => {
         password: data.password
 
       };
+
       axios.post("http://localhost:3001/user/logIn", userData).then((response) => {
           console.log(response.data);
           
@@ -41,10 +42,11 @@ if(response.status==200){
       user: response.data.user,
       token: response.token,
       posts: response.data.posts,
-      profilePhoto: response.data.user.profilePhoto
+      profilePhoto: response.data.user.profilePhoto,
+      communities: response.data.communities
     })
   );
-  console.log( response.data.posts);
+  console.log( response.data.communities);
   navigate("/profilePage");}
   else{
     navigate('/')

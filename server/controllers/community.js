@@ -64,9 +64,9 @@ catch(err){
 const addPost= async (req, res)=>{
     try{
         const {communityName, post}= req.body;
-        Community.findOneAndUpdate({communityName: communityName}, {posts: posts.push(post)}, {returnOriginal: true}).then((response)=>{
-            res.status(201).json(response);
-        })
+        
+        const community=await Community.findOneAndUpdate({communityName: communityName}, {$push:{posts: post}}, {returnOriginal: true}).then((response)=>res.status(201).json(response));
+        
         }
         catch(err){
             res.status(200).json({});
