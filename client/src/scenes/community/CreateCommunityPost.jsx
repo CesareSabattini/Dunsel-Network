@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 import { setPosts } from '../../state/index';
 import { ArrowBack, Upload } from '@mui/icons-material';
-import UploadImage from '../../components/UploadImage';
+import UploadCommunityImage from '../../components/UploadCommunityImage';
 
 
 const CreateCommunityPost = () => {
@@ -96,7 +96,7 @@ initialValues={
 
 <div className='flex items-center justify-center row-start-2 col-start-2 col-span-2 cursor-pointer '>
 
-<UploadImage/>
+<UploadCommunityImage/>
 </div>
 
 </div>

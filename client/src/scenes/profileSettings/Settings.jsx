@@ -52,7 +52,7 @@ const handleChange = (e) => {
 
 
   return (
-    <div className='h-[100vh]  text-black'>
+    <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]'>
 <div className='text-5xl font-bold px-10 pt-10'>
 Settings
 
@@ -72,7 +72,7 @@ Settings
 <br />
 <span> Change Password </span>
 <br />
-<span> Change Description:</span>
+
 
 <Formik 
 onSubmit={handleSubmit}
@@ -82,8 +82,8 @@ initialValues={
 >
 
   <Form >
-
-    <Field type='string' name='description' onChange={handleChange} value={data.description}  className=' mb-[0.7vh] bg-transparent border-b-[2px] rounded  text-center shadow-sky-500 shadow-xl py-4' placeholder='/description/'/>
+  <span> Change Description:</span>
+    <Field type='string' name='description' onChange={handleChange} value={data.description}  className=' mb-[0.7vh] bg-transparent border-b-[2px] rounded  text-center shadow-sky-500 shadow-sm mx-3 py-1' placeholder=''/>
  
   </Form>
 

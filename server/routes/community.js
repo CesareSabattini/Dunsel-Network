@@ -6,9 +6,9 @@ router.post('/create', createCommunity);
 
 router.get('/getCommunities', getCommunities);
 
-router.get('/get', getCommunity);
+router.get('/get/:communityName', getCommunity);
 
-router.post('/addTo', addToCommunity);
+router.post('/:userName/addTo/:communityName', addToCommunity);
 
 router.post('/addPost', addPost);
 

@@ -15,10 +15,12 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { setSearchedCommunity, setLogout } from '../state';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+
 const settings = ['Profile'];
 
 
@@ -71,20 +73,64 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navigate= useNavigate();
+    const [inputCommunity, setMessage] = useState('');
+    const navigate= useNavigate();
     const profilePhoto= useSelector((state)=>state.profilePhoto);
-
+const dispatch= useDispatch()
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
   
-    const handleCloseUserMenu = () => {
-     navigate('/profilePage')
+    const handleCloseUserMenu = (event) => {
+      event.preventDefault();
+
+      window.location.reload();
+     
     };
 
+    const handleNavigateHome = (event)=>{
+
+event.preventDefault();
+if(window.location.href==='http://localhost:5173/home'){
+window.location.reload();
+}
+else{navigate('/home')}
+
+
+    }
     const handleCreateCommunity= ()=>{
       navigate('/community/create')
     }
+const handleNavigateProfile= ()=>{
+  navigate('/profilePage')
+}
+    const handleChange = event => {
+      event.preventDefault();
+      setMessage(event.target.value);
+  
+      console.log(inputCommunity);
+    };
+
+    
+  const handleKeyDown = async event => {
+  
+    if (event.key === 'Enter') {
+ 
+      event.preventDefault();
+
+      const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`)
+.then((response)=>{
+  console.log(response.data);
+  dispatch(
+    setSearchedCommunity({
+      communityData: response.data.community
+    })
+  )
+  navigate(`/community/${inputCommunity}`)
+})
+
+    }
+  };
   
     return (
         <Box sx={{ flexGrow: 1 }}  className='bg-black shadow-xl shadow-sky-500' >
@@ -96,6 +142,11 @@ function ResponsiveAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+             id="searchedCommunity"
+             name="searchedCommunity"
+             onChange={handleChange}
+             onKeyDown={handleKeyDown}
+             value={inputCommunity} type="text" 
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
@@ -123,7 +174,7 @@ function ResponsiveAppBar() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar src={`./src/assets/background/${profilePhoto}`} />
+                    <Avatar src={`../src/assets/background/${profilePhoto}`} />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -142,13 +193,19 @@ function ResponsiveAppBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                  
+                  <MenuItem key={'1'} onClick={handleNavigateProfile}>
+                      <Typography textAlign="center">Profile</Typography>
                     </MenuItem>
-                  ))}
-                    <MenuItem key={''} onClick={handleCreateCommunity}>
+                    <MenuItem key={'2'} onClick={handleCreateCommunity}>
                       <Typography textAlign="center">Create Community</Typography>
+                    </MenuItem>
+                    <MenuItem key={'3'} onClick={handleNavigateHome}>
+                      <Typography textAlign="center">Home</Typography>
+                    </MenuItem>
+                    <MenuItem key={'4'} onClick={() =>{dispatch(setLogout())
+    navigate('/logIn')}}>
+                      <Typography textAlign="center">Log Out</Typography>
                     </MenuItem>
                 </Menu>
               </Box>

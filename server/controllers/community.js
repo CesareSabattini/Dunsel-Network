@@ -27,7 +27,7 @@ const createCommunity= async (req, res)=>{
 const getCommunities= async (req, res)=>{
     try{
 const userName= req.body.userName;
-const user= await User.findOne({userName:userName}).then((response)=>{
+const user= await Community.findOne({userName:userName}).then((response)=>{
     res.status(201).json(response);
 });}
 catch(err){
@@ -36,25 +36,31 @@ catch(err){
 
 }
 
+
+
+
 const getCommunity= async (req, res)=>{
     try{
-    const communityName= req.body.communityName;
-    const community= await Community.findOne({communityName:communityName}).then((response)=>{
-       console.log(response);
-       res.status(201).json(response);
-    });
-   
-}
-catch(err){
-    res.status(400).json({});
-}
+        console.log(req.params)
+        const {communityName}=req.params;
+        const community=await Community.findOne({communityName: communityName});
+        
+        res.status(200).json({community});
+    }
+    catch(err){
+res.status(200).json({});
+    }
 
 }
+
 
 const addToCommunity= async (req, res)=>{
     try{
-const {userName, communityName}= req.body;
-Community.findOneAndUpdate({communityName: communityName}, {communities: members.push(userName)}, {returnOriginal: true})
+        console.log(req.params)
+
+const {userName, communityName}= req.params;
+
+const community=await Community.findOneAndUpdate({communityName: communityName}, {$push:{members: userName}}, {returnOriginal: true}).then((response)=>res.status(201).json(response));
 }
 catch(err){
     res.status(200).json({});
@@ -63,9 +69,12 @@ catch(err){
 
 const addPost= async (req, res)=>{
     try{
+        console.log(req.body)
         const {communityName, post}= req.body;
         
-        const community=await Community.findOneAndUpdate({communityName: communityName}, {$push:{posts: post}}, {returnOriginal: true}).then((response)=>res.status(201).json(response));
+        const community=await Community.findOneAndUpdate({communityName: communityName}, {$push:{posts: post}}, {returnOriginal: true}).then((response)=>{
+            console.log(response)
+            res.status(201).json(response)});
         
         }
         catch(err){
