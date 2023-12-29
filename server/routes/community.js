@@ -1,6 +1,6 @@
 const express= require('express');
 const router= express.Router();
-const {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity}= require('../controllers/community.js');
+const {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity, postComment}= require('../controllers/community.js');
 const { deletePost } = require('../controllers/post.js');
 
 router.post('/create', createCommunity);
@@ -14,5 +14,7 @@ router.post('/:userName/addTo/:communityName', addToCommunity);
 router.post('/addPost', addPost);
 
 router.post('/:userName/leaves/:communityName', leaveCommunity)
+
+router.post('/postComment', postComment);
 
 module.exports= router;

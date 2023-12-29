@@ -41,7 +41,7 @@ return (
   <div className='h-[90vh]'>
 
     <div>
-{isMember ? (   <button className='bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
+{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
     
     onClick= {event=>{
       event.preventDefault();
@@ -49,7 +49,7 @@ return (
     }}
     >
       Add Post</button>) : (
-           <button className='bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
+           <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
            onClick= {async (event)=>{
              event.preventDefault();
@@ -60,7 +60,7 @@ return (
       )}
     </div>
     <div>
-{isMember ? (   <button className='bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
+{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
     onClick= {async event=>{
       event.preventDefault();
@@ -77,7 +77,7 @@ return (
     </div>
   <div className='col-start-2 col-span-3 h-[91vh]'>
     
-    <div className='flex justify-center mx-[40vh] my-10 text-3xl font-bold font-mono'>
+    <div className='flex justify-center mx-[0vh] my-10 text-3xl font-bold font-mono'>
  {community.communityName}
       </div>
     
@@ -89,7 +89,7 @@ return (
       Posts: {community.posts.length}
     </div>
     </div>
-    <div className='h-[62vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
+    <div className='h-[71vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
   
 
   

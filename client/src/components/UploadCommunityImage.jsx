@@ -26,7 +26,8 @@ const UploadCommunityImage = () => {
 
             userName: user.userName,
             description:'yo',
-            url: acceptedFiles[0].name
+            url: acceptedFiles[0].name,
+            comments:[]
         }
       const reqData={
         post: post,

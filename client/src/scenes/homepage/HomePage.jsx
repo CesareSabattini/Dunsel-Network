@@ -71,6 +71,9 @@ const HomePage = () => {
 
         </div>
         
+        <div className='col-span-2 flex justify-center'>
+          Yo
+        </div>
         </div>
         
         </div>

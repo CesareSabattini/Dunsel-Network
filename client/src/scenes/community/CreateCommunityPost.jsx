@@ -33,7 +33,8 @@ const CreateCommunityPost = () => {
 const post={
     userName: user.userName,
     description: data.description,
-    url: data.url
+    url: data.url,
+    comments: ['Ciao', 'Seki lei']
 }
 
 const reqData={

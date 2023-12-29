@@ -27,7 +27,7 @@ const createCommunity= async (req, res)=>{
 const getCommunities= async (req, res)=>{
     try{
 const userName= req.body.userName;
-const user= await Community.findOne({userName:userName}).then((response)=>{
+const user= await Community.find({userName:userName}).then((response)=>{
     res.status(201).json(response);
 });}
 catch(err){
@@ -96,4 +96,24 @@ const addPost= async (req, res)=>{
         }
 }
 
-module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity };
+const postComment= async (req, res)=>{
+    try{
+const {userName, post, communityName,text}=req.body;
+const newComment={
+userName: userName,
+text:text
+}
+post.comments.push(newComment);
+const pullOperation=await Community.findOneAndUpdate({communityName:communityName}, {$pull:{posts: {url: post.url, userName: post.userName, description: post.description}}},  { safe: true, multi: false } ).then(()=>{console.log('post pulled')})
+const pushOperation=await Community.findOneAndUpdate({communityName: communityName}, {$push:{posts: post}}, {returnOriginal: true}).then((response)=>{
+    console.log(response)
+    res.status(201).json(response)});
+
+        console.log(req.body)
+    }
+    catch(err){
+        res.status(200).json({});
+    }
+}
+
+module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity, postComment };
