@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout, setSearchedUser, setSearchedUserPosts } from "../../state/index";
+import { setLogout, setPosts, setPosts2, setSearchedUser, setSearchedUserPosts } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useState} from 'react';
@@ -15,8 +15,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const description= useSelector((state)=>state.description);
-  const searchedUser = useSelector((state) => state.searchedUser);
+  const description= user.description;
+  
  const profilePhoto= useSelector((state)=>state.profilePhoto);
 
   const posts= useSelector((state)=>state.posts)
@@ -66,6 +66,29 @@ const ProfilePage = () => {
     navigate('/home');
    }
 
+   const handlePostDelete= async (element)=>{
+const reqData={
+  userName: user.userName,
+  postId: element._id
+}
+console.log(element._id)
+
+const res=await axios.delete(`http://localhost:3001/post/delete/${user.userName}/${element._id}`).then((response)=>{
+  console.log(response);
+  
+
+})
+
+const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`).then((response)=>{
+ console.log(response.data)
+dispatch(
+    setPosts2({
+posts: response.data
+    })
+  )
+ 
+})
+   }
   return (
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[100vh]
 grid grid-cols-6 grid-rows-4
@@ -88,20 +111,30 @@ grid grid-cols-6 grid-rows-4
 
     </div>
     </div>
+    <div className='col-start-1 row-start-3 col-span-2 '>
     <input     
         id="searchedUser"
         name="searchedUser"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={inputUser} type="text" placeholder="Search User" className="input mt-5 col-start-1 row-start-3 col-span-2 bg-black input-bordered input-info m-4 max-w-xs" />
+        value={inputUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info m-4 max-w-xs" />
     
+    <button className='pt-4 ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
+  <AddPhotoAlternateIcon />
+</button>
+<button className=' ml-5 h-[10vh] w-[10vh] col-start-6 row-start-' onClick={navigateHome}>
+  <HomeIcon/>
+</button>
+    </div>
     <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl '>
         {user.userName}
     </div>
 <div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-stone-200 border-b-2 rounded'>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-stone-200'><img key={element._id} src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl' /></div>
+    return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' onClick={event=>{
+      event.preventDefault();
+      handlePostDelete(element)}}><img key={element._id}  src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' /></div>
   })}
  </div>
 
@@ -119,12 +152,7 @@ grid grid-cols-6 grid-rows-4
     navigate('/settings')}}>Settings</button></li>
   </ul>
 </div>
-<button className='pt-4 ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
-  <AddPhotoAlternateIcon />
-</button>
-<button className=' ml-5 h-[10vh] w-[10vh] col-start-6 row-start-' onClick={navigateHome}>
-  <HomeIcon/>
-</button>
+
 
 
     </div>

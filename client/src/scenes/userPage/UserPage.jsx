@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import axios from 'axios';
-import { setFollowed } from '../../state/index';
+import { setFollowed, setUser } from '../../state/index';
 
 const UserPage = () => {    
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ const user= useSelector((state)=>state.user)
         followedName: searchedUser[0].userName
       }
 
-     axios.post('http://localhost:3001/user/addFollowed', reqData).then((response)=>{
+     await axios.post('http://localhost:3001/user/addFollowed', reqData).then((response)=>{
       
     if(response.data==='Already Following'){
       console.log(response);
@@ -39,8 +39,19 @@ const user= useSelector((state)=>state.user)
       followers: response.followers
     })
   
-  console.log(user.followed)}
+  console.log(user.followed)
+}
     })
+
+   await axios.get(`http://localhost:3001/user/${user.userName}`).then((response)=>{
+    console.log(response.data.user)
+   dispatch(
+      setUser({
+        user:response.data.user[0]
+      }
+      )
+    )
+   })
 
      }
 

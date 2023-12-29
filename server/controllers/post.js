@@ -21,7 +21,7 @@ const {Post} =require( '../models/Post.js');
 
     const getPosts= async (req,res)=>{
         try{
-const {userName}= req.body;
+const {userName}= req.params;
 const posts= await Post.find({userName: userName});
 res.status(201).json(posts);
         }
@@ -30,5 +30,19 @@ res.status(201).json(posts);
          }
     }
 
+    const deletePost= async (req, res)=>{
+        try{
+const {userName, postId}= req.params;
+console.log(req.body)
+await Post.deleteOne({userName: userName, _id: postId}).then((response)=>{
+    console.log('Post deleted')
+    res.status(200).json(response)
+})
+        }
+        catch(err){
+            res.status(409).json({message: err.message})
+        }
+    }
+
    
-    module.exports= {createPost, getPosts};
+    module.exports= {createPost, getPosts, deletePost};

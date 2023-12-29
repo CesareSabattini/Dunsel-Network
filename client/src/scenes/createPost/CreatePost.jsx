@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { setPosts } from '../../state/index';
+import { setPosts, setPosts2 } from '../../state/index';
 import { ArrowBack, Upload } from '@mui/icons-material';
 import UploadImage from '../../components/UploadImage';
 
@@ -15,6 +15,7 @@ const CreatePost = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const Posts= useSelector((state)=>state.posts)
     const [data, setData] = useState({
         url:"",
         description:""
@@ -27,11 +28,7 @@ const CreatePost = () => {
   
 
     const handleSubmit= async()=>{
-        dispatch(
-            setPosts({
-            userName: user.userName,
-            url: data.url,
-            description: data.description}));
+       
 
 const postData={
     userName: user.userName,
@@ -42,9 +39,19 @@ const postData={
 const res= await axios.post('http://localhost:3001/post/create', postData).then((response)=>{    
 console.log(response.data);
 
-    navigate(`/profilePage`)
 })
 
+const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`).then((response)=>{
+
+dispatch(
+    setPosts2({
+posts: response
+    })
+  )
+ console.log(`POSTS: ${Posts}` )
+ 
+})
+ navigate(`/profilePage`)
     }
     const handleChange = (e) => {
         const value = e.target.value;

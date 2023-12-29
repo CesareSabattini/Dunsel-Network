@@ -64,6 +64,9 @@ const initialState = {
 
          state.posts.push(post);
         },
+        setPosts2: (state,action)=>{
+          state.posts= action.payload.posts;
+        },
         setProfilePhoto: (state, action)=>{
           state.profilePhoto=action.payload.profilePhoto;
         },
@@ -79,9 +82,12 @@ const initialState = {
         setSearchedCommunity: (state, action)=>{
           state.searchedCommunity=action.payload.communityData;
         },
+        setUser:(state, action)=>{
+          state.user= action.payload.user;
+        }
     }
   })
 
   
-export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setDescription, setFollowed, setFollowers, setSearchedCommunity} = authSlice.actions;
+export const { setLogin, setLogout, setSearchedUser, setPosts, setSearchedUserPosts, setProfilePhoto, setDescription, setFollowed, setFollowers, setPosts2, setSearchedCommunity, setUser} = authSlice.actions;
 export default authSlice.reducer;

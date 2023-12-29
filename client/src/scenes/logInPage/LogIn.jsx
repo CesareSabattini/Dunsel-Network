@@ -43,7 +43,7 @@ if(response.status==200){
       token: response.token,
       posts: response.data.posts,
       profilePhoto: response.data.user.profilePhoto,
-      communities: response.data.communities
+      communities: response.data.communities,
     })
   );
   console.log( response.data.communities);

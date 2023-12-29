@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setPosts } from '../state';
+import { setPosts, setPosts2 } from '../state';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -20,13 +20,7 @@ const UploadImage = () => {
         setUploadedFiles(acceptedFiles);
         console.log(acceptedFiles)
 
-        dispatch(
-            setPosts({ 
-                userName: user.userName,
-                url: acceptedFiles[0].name,
-                description: ''
-            })
-        )
+       
         const postData={
             userName: user.userName,
             description:'yo',
@@ -35,7 +29,11 @@ const UploadImage = () => {
 
         const res= await axios.post('http://localhost:3001/post/create', postData).then((response)=>{    
             console.log(response.data);
-            
+            dispatch(
+              setPosts2({ 
+                  posts: response.data
+              })
+          )
                 navigate(`/profilePage`)
             })
       },
