@@ -67,6 +67,20 @@ catch(err){
 }
 }
 
+const leaveCommunity= async (req, res)=>{
+    try{
+        console.log(req.params)
+
+const {userName, communityName}= req.params;
+
+const community=await Community.findOneAndUpdate({communityName: communityName}, {$pull:{members: userName}},  { safe: true, multi: false }).then((response)=>res.status(200).json({ message: "Album Deleted Successfully" }));
+}
+catch(err){
+    res.status(209).json({});
+}
+}
+
+
 const addPost= async (req, res)=>{
     try{
         console.log(req.body)
@@ -82,4 +96,4 @@ const addPost= async (req, res)=>{
         }
 }
 
-module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost };
+module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity };

@@ -12,11 +12,9 @@ const CommunityPage = ({location}) => {
 const community= useSelector((state)=>state.searchedCommunity)
 const user= useSelector((state)=>state.user)
 let isMember= community.members.includes(user.userName)
+
 const handleJoinCommunity= async ()=>{
-const reqData={
-  username: user.userName,
-  communityname: community.communityName
-}
+
 const res= await axios.post(`http://localhost:3001/community/${user.userName}/addTo/${community.communityName}`)
 .then((response)=>{
   console.log(response.data);
@@ -24,6 +22,17 @@ const res= await axios.post(`http://localhost:3001/community/${user.userName}/ad
   
 })
 }  
+
+const handleLeaveCommunity= async ()=>{
+
+  const res= await axios.post(`http://localhost:3001/community/${user.userName}/leaves/${community.communityName}`)
+.then((response)=>{
+  
+  navigate('/home')
+  
+})
+
+}
 
 return (
     <div className=' bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh]'>
@@ -50,7 +59,21 @@ return (
              Join</button>
       )}
     </div>
+    <div>
+{isMember ? (   <button className='bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
+    
+    onClick= {async event=>{
+      event.preventDefault();
+     await handleLeaveCommunity();
+    }}
+    >
+      Leave Community</button>) : (
+           <div></div>
+      )}
+    </div>
  
+
+
     </div>
   <div className='col-start-2 col-span-3 h-[91vh]'>
     
@@ -66,7 +89,7 @@ return (
       Posts: {community.posts.length}
     </div>
     </div>
-    <div className='h-[66vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
+    <div className='h-[62vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
   
 
   

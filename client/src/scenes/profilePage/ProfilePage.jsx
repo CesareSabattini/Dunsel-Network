@@ -134,7 +134,7 @@ grid grid-cols-6 grid-rows-4
 {posts.map(element => {
     return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' onClick={event=>{
       event.preventDefault();
-      handlePostDelete(element)}}><img key={element._id}  src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' /></div>
+      handlePostDelete(element)}} key={element._id}><img src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' /></div>
   })}
  </div>
 

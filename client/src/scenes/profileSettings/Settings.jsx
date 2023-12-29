@@ -56,7 +56,7 @@ const handleChange = (e) => {
 <div className='text-5xl font-bold px-10 pt-10'>
 Settings
 
-<div className='row-start-1 col-start-6 text-sky-500 flex justify-end pr-[40vh] pt-0'>
+<div className='text-sky-500 flex justify-end pr-[20vh] pt-0'>
   <button onClick={navigateBack}>
    <ArrowBackIcon className='border rounded-full shadow-sky-500 shadow-lg mb-10'/>
    </button>
@@ -89,7 +89,8 @@ initialValues={
 
 </Formik>
 <br />
-<span className='text-red-500'>Delete Account</span>
+<span className='text-red-500'>
+  Delete Account</span>
 </div>
 
     </div>
