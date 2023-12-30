@@ -116,4 +116,40 @@ const pushOperation=await Community.findOneAndUpdate({communityName: communityNa
     }
 }
 
-module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity, postComment };
+
+const getFeedPosts= async (req, res)=>{
+    try{
+    const {userName}=req.params;
+    const followedCommunities=await Community.find({members: {$elemMatch:{$in: userName}}}).then((response)=>{
+        
+        const feedPosts= Array();
+        for(let j=0; j<response.length; j++){
+        for(let i=0; i<response[j].posts.length; i++){
+const {userName, description, url, comments}= response[j].posts[i];
+feedPosts.push({
+userName: userName,
+description: description,
+url: url,
+comments: comments,
+communityName: response[j].communityName
+
+})
+        }}
+       
+        
+            for (let i = feedPosts.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              const temp = feedPosts[i];
+              feedPosts[i] = feedPosts[j];
+              feedPosts[j] = temp;
+            }
+          
+        console.log(feedPosts);
+        res.status(200).json(feedPosts)
+    })}
+    catch(err){
+        res.status(200).json({});
+    }
+}
+
+module.exports= {createCommunity, getCommunities, getCommunity, addToCommunity, addPost, leaveCommunity, postComment, getFeedPosts };

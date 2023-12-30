@@ -7,13 +7,16 @@ import { setLogout, setSearchedCommunity, setSearchedUser, setSearchedUserPosts 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SettingsIcon from '@mui/icons-material/Settings';
+import CommunityPost from '../../components/CommunityPost';
+
+
 const HomePage = () => {
 
   
   const dispatch = useDispatch();
   const user=useSelector((state)=>state.user);
   const posts=useSelector((state)=>state.posts);
-  
+  const feedPosts= useSelector((state)=>state.feedPosts);
   const navigate= useNavigate();
   const handleClick= (event)=>{
     event.preventDefault();
@@ -72,7 +75,15 @@ const HomePage = () => {
         </div>
         
         <div className='col-span-2 flex justify-center'>
-          Yo
+         <div className='h-[90vh] overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600'>
+         {feedPosts.map((elem)=>{
+          return <div className='text-center pt-5'>
+           <div className='font-mono flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 px-3 mx-3 rounded py-1'>{elem.communityName}</div> 
+          <CommunityPost post={elem}/>
+          </div>
+         })}
+         </div>
+          
         </div>
         </div>
         

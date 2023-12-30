@@ -25,7 +25,7 @@ export default  function CommentsSection(post) {
     const navigate= useNavigate();
     const community= useSelector((state)=>state.searchedCommunity)
   const user= useSelector((state)=>state.user)
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
  
   const [data, setData] = React.useState({
     myComment:""

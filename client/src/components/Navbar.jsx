@@ -121,12 +121,18 @@ const handleNavigateProfile= ()=>{
       const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`)
 .then((response)=>{
   console.log(response.data);
-  dispatch(
-    setSearchedCommunity({
-      communityData: response.data.community
-    })
-  )
-  navigate(`/community/${inputCommunity}`)
+  if(response.data.community===null){
+   window.location.reload(true);
+
+  }else{
+    dispatch(
+      setSearchedCommunity({
+        communityData: response.data.community
+      })
+    )
+    navigate(`/community/${inputCommunity}`)
+  }
+
 })
 
     }

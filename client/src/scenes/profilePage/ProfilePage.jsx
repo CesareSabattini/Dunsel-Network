@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout, setPosts, setPosts2, setSearchedUser, setSearchedUserPosts } from "../../state/index";
+import { setFeedPosts, setLogout, setPosts, setPosts2, setSearchedUser, setSearchedUserPosts } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useState} from 'react';
@@ -63,7 +63,14 @@ const ProfilePage = () => {
 
    const navigateHome= async event=>{
     event.preventDefault();
-    navigate('/home');
+
+    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`).then((response)=>{
+      console.log(response);
+    dispatch(setFeedPosts({
+        feedPosts: response.data
+      }))
+      navigate('/home');
+    })
    }
 
    const handlePostDelete= async (element)=>{
