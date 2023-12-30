@@ -3,13 +3,11 @@ import { useDropzone } from 'react-dropzone'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setPosts } from '../state';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const UploadCommunityImage = () => {
     
-    const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
     const community= useSelector((state)=>state.searchedCommunity)

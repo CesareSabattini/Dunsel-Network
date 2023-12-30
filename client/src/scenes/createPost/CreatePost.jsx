@@ -70,34 +70,6 @@ posts: response
 
 
   
-  <div  className='flex items-center justify-center col-span-4 row-start-3 mt-[20vh] '>
-
-<Formik 
-onSubmit={handleSubmit}
-initialValues={
-{url:'', description:''}
-
-}
->
-
-  <Form >
-
-    <div className='grid grid-cols-2 grid-rows-2 gap-7'>
-   <Field type='string' name='url' onChange={handleChange} value={data.url}  className=' mb-[0.7vh] bg-transparent border-b-[2px] rounded  text-center shadow-sky-500 shadow-xl py-4' placeholder='image url'/>
- 
-    <Field type='string' name='description' onChange={handleChange}  value={data.description}  className='mb-[0.7vh] bg-transparent border-b-[2px] rounded  bg-transparent border-b-2 text-center shadow-sky-500 shadow-xl py-4' placeholder='description'/>
-    <div className=' p-3 bg-gradient-to-b from-transparent text-white font-bold rounded-lg transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500 border-b-[2px] border-sky-500  flex text-xl justify-center col-span-2'>
-    <button type="submit">
-             Share
-           </button>
-           </div>
-    </div>
-  
-        
-  </Form>
-
-</Formik>
-</div>
 
 <div className='flex items-center justify-center row-start-2 col-start-2 col-span-2 cursor-pointer '>
 

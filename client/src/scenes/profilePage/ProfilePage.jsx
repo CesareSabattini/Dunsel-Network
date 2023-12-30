@@ -115,6 +115,7 @@ grid grid-cols-6 grid-rows-4
         <br />
         Followed: {user.followed.length}
         <br />
+        Communities: {user.communities.length}
 
     </div>
     </div>

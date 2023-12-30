@@ -132,7 +132,7 @@ initialValues={
     
     event.preventDefault();
     await handleClickUser(element.userName);
- }}>{element.userName}</span>: <span>{element.text}</span></div>
+ }} className='cursor-pointer'>{element.userName}</span>: <span>{element.text}</span></div>
 
         </ListItem>
 })}

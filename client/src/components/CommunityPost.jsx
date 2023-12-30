@@ -3,18 +3,40 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CommentsSection from './CommentsSection';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setSearchedUser, setSearchedUserPosts } from '../state';
 
 const CommunityPost = (post) => {
   const navigate= useNavigate();
+  const dispatch=useDispatch()
+
+  const handleClickUser = async (clickedUser) => {
+    const res= await axios.get(`http://localhost:3001/user/${clickedUser}`)
+.then((response)=>{
+console.log(response.data);
+dispatch(
+  setSearchedUserPosts({
+    searchedUserPosts: response.data.posts
+  })
+)
+ dispatch(
+  setSearchedUser({
+    searchedUser: response.data.user,
+  },  navigate(`/user/${clickedUser}`) ))
+})
+
+  
+};
   
   return (
    <Box className='py-5 border-b'>
   
-    <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1'
+    <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1 cursor-pointer'
     
     onClick= {event=>{
       event.preventDefault();
-      navigate(`/user/${post.post.userName}`);
+      handleClickUser(post.post.userName);
     }}>
     {post.post.userName}
       </div>
