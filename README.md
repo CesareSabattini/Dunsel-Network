@@ -11,3 +11,4 @@ The authentication system utilizes Bcrypt and JWT.
 
 ## What is this for?
 This project is maily exposed for showing purposes, as a portfolio project, but it will luckily be deployed in the future.
+Check out my personal portfolio website to learn more:  www.fullstackdunsel.com
