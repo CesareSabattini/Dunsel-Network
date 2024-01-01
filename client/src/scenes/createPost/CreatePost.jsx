@@ -15,6 +15,7 @@ const CreatePost = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const token= useSelector(state=>state.token)
     const Posts= useSelector((state)=>state.posts)
     const [data, setData] = useState({
         url:"",
@@ -36,12 +37,24 @@ const postData={
     url: data.url
 }
 
-const res= await axios.post('http://localhost:3001/post/create', postData).then((response)=>{    
+const res= await axios.post('http://localhost:3001/post/create', postData, 
+{
+  headers:{
+    'Authorization': 'Bearer ' + token
+  }
+}
+).then((response)=>{    
 console.log(response.data);
 
 })
 
-const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`).then((response)=>{
+const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`,
+{
+  headers:{
+    'Authorization': 'Bearer ' + token
+  }
+}
+).then((response)=>{
 
 dispatch(
     setPosts2({

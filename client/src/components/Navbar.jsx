@@ -18,7 +18,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { setSearchedCommunity, setLogout } from '../state';
+import state, { setSearchedCommunity, setLogout } from '../state';
 
 
 const settings = ['Profile'];
@@ -75,6 +75,7 @@ function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [inputCommunity, setMessage] = useState('');
     const navigate= useNavigate();
+    const token= useSelector(state=>state.token)
     const profilePhoto= useSelector((state)=>state.profilePhoto);
 const dispatch= useDispatch()
     const handleOpenUserMenu = (event) => {
@@ -118,7 +119,12 @@ const handleNavigateProfile= ()=>{
  
       event.preventDefault();
 
-      const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`)
+      const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`,
+      {
+        headers:{
+          'Authorization': "Bearer " + token
+        }
+      })
 .then((response)=>{
   console.log(response.data);
   if(response.data.community===null){
@@ -139,7 +145,7 @@ const handleNavigateProfile= ()=>{
   };
   
     return (
-        <Box sx={{ flexGrow: 1 }}  className='bg-black shadow-xl shadow-sky-500' >
+        <Box sx={{ flexGrow: 1 }}  className='bg-black shadow-xl shadow-sky-500 w-full' >
         <AppBar position="static" className='bg-black'>
           <Container className='bg-black' >
             <Toolbar disableGutters>

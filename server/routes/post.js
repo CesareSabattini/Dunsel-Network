@@ -4,10 +4,10 @@ const { createPost, getPosts, deletePost } = require('../controllers/post');
 
 const router= express.Router();
 
-router.post('/create', (req,res)=>{createPost(req,res)});
+router.post('/create', verifyToken, (req,res)=>{createPost(req,res)});
 
-router.get('/get/:userName', getPosts);
+router.get('/get/:userName',verifyToken, getPosts);
 
 
-router.delete('/delete/:userName/:postId', deletePost);
+router.delete('/delete/:userName/:postId', verifyToken, deletePost);
 module.exports= router;

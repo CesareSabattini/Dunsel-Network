@@ -10,6 +10,7 @@ const CreateCommunity = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const token= useSelector(state=>state.token)
     const [data, setData] = useState({
         communityName:"",
         communityTheme:"",
@@ -32,7 +33,13 @@ const communityData={
     communityDescription: data.communityDescription
 }
 
-const res= await axios.post('http://localhost:3001/community/create', communityData).then((response)=>{    
+const res= await axios.post('http://localhost:3001/community/create', communityData,
+{
+  headers:{
+    'Authorization': "Bearer " + token
+  }
+}
+).then((response)=>{    
 console.log(response.data);
 
     navigate(`/home`)

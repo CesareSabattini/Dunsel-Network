@@ -4,15 +4,20 @@ import { useNavigate } from 'react-router-dom'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CommentsSection from './CommentsSection';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedUser, setSearchedUserPosts } from '../state';
 
 const CommunityPost = (post) => {
   const navigate= useNavigate();
   const dispatch=useDispatch()
+  const token= useSelector(state=>state.token)
 
   const handleClickUser = async (clickedUser) => {
-    const res= await axios.get(`http://localhost:3001/user/${clickedUser}`)
+    const res= await axios.get(`http://localhost:3001/user/${clickedUser}`,
+    {headers: {
+      'Authorization': 'Bearer ' + token}
+    }
+    )
 .then((response)=>{
 console.log(response.data);
 dispatch(

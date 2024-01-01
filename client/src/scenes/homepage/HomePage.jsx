@@ -16,6 +16,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const user=useSelector((state)=>state.user);
   const posts=useSelector((state)=>state.posts);
+  
   const feedPosts= useSelector((state)=>state.feedPosts);
   const navigate= useNavigate();
   const handleClick= (event)=>{
@@ -23,13 +24,17 @@ const HomePage = () => {
     
 
   }
-
+  const token= useSelector((state)=>state.token)
   const handleSearchCommunity= async (elem)=>{
 
-    const communityData={
-      communityName: elem.communityName
+  
+    const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${elem.communityName}`,
+    {
+      headers: {
+      'Authorization': 'Bearer ' + token
     }
-    const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${elem.communityName}`, communityData ).then(
+    } 
+    ).then(
       (response)=>{
         dispatch(
           setSearchedCommunity({

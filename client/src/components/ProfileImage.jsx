@@ -13,6 +13,7 @@ const ProfileImage = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const token= useSelector((state)=>state.token)
     const profilePhoto= useSelector((state)=>state.profilePhoto);
 
     const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -40,7 +41,13 @@ const ProfileImage = () => {
             }));
             console.log(profilePhoto)
 
-        const res= await axios.post('http://localhost:3001/user/setProfilePhoto', imageData).then((response)=>{    
+        const res= await axios.post('http://localhost:3001/user/setProfilePhoto', imageData, 
+        {
+          headers:{
+            'Authorization': 'Bearer ' + token
+          }
+        }
+        ).then((response)=>{    
             console.log(response.data);
             
                 navigate(`/profilePage`)

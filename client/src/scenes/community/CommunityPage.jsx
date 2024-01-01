@@ -12,10 +12,17 @@ const CommunityPage = ({location}) => {
 const community= useSelector((state)=>state.searchedCommunity)
 const user= useSelector((state)=>state.user)
 let isMember= community.members.includes(user.userName)
-
+const token= useSelector(state=>state.token)
 const handleJoinCommunity= async ()=>{
+  const data={}
 
-const res= await axios.post(`http://localhost:3001/community/${user.userName}/addTo/${community.communityName}`)
+const res= await axios.post(`http://localhost:3001/community/${user.userName}/addTo/${community.communityName}`,data,
+{
+  headers:{
+    'Authorization': "Bearer " + token
+  }
+}
+)
 .then((response)=>{
   console.log(response.data);
   navigate('/home')
@@ -25,7 +32,14 @@ const res= await axios.post(`http://localhost:3001/community/${user.userName}/ad
 
 const handleLeaveCommunity= async ()=>{
 
-  const res= await axios.post(`http://localhost:3001/community/${user.userName}/leaves/${community.communityName}`)
+  const res= await axios.post(`http://localhost:3001/community/${user.userName}/leaves/${community.communityName}`,
+  {},
+  {
+    headers:{
+      'Authorization': "Bearer " + token
+    }
+  }
+  )
 .then((response)=>{
   
   navigate('/home')

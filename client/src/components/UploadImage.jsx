@@ -12,6 +12,7 @@ const UploadImage = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const token= useSelector(state=>state.token)
 
     const [uploadedFiles, setUploadedFiles] = useState([]);
     
@@ -27,7 +28,13 @@ const UploadImage = () => {
             url: acceptedFiles[0].name
         }
 
-        const res= await axios.post('http://localhost:3001/post/create', postData).then((response)=>{    
+        const res= await axios.post('http://localhost:3001/post/create', postData, 
+        {
+          headers:{
+            'Authorization': 'Bearer ' + token
+          }
+        }
+        ).then((response)=>{    
             console.log(response.data);
             dispatch(
               setPosts2({ 

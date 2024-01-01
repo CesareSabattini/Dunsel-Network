@@ -17,7 +17,7 @@ const communitySchema= new mongoose.Schema({
         type: Array
     }
 
-});
+}, {timestamps: true});
 
 const Community= mongoose.model('Community', communitySchema);
 module.exports= {Community};

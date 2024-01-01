@@ -15,7 +15,7 @@ const UserPage = () => {
     const params=useParams();
     const searchedUser= useSelector((state)=>state.searchedUser)
 const user= useSelector((state)=>state.user)
-
+const token= useSelector(state=>state.token)
     const posts= useSelector((state)=>state.searchedUserPosts)
    
     const navigateBack= async event=>{
@@ -29,7 +29,14 @@ const user= useSelector((state)=>state.user)
         followedName: searchedUser[0].userName
       }
 
-     await axios.post('http://localhost:3001/user/addFollowed', reqData).then((response)=>{
+     await axios.post('http://localhost:3001/user/addFollowed', reqData,
+     
+     {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+     }
+     ).then((response)=>{
       
     if(response.data==='Already Following'){
       console.log(response);
@@ -43,7 +50,13 @@ const user= useSelector((state)=>state.user)
 }
     })
 
-   await axios.get(`http://localhost:3001/user/${user.userName}`).then((response)=>{
+   await axios.get(`http://localhost:3001/user/${user.userName}`,
+   {
+    headers:{
+      'Authorization': "Bearer " + token
+    }
+  }
+   ).then((response)=>{
     console.log(response.data.user)
    dispatch(
       setUser({

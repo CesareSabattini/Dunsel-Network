@@ -32,15 +32,16 @@ const LogIn = () => {
         password: data.password
 
       };
-
+try{
       axios.post("http://localhost:3001/user/logIn", userData).then((response) => {
-          console.log(response.data);
+       try{  
+      console.log(response.data.token);
           
 if(response.status==200){
   dispatch(
     setLogin({
       user: response.data.user,
-      token: response.token,
+      token: response.data.token,
       posts: response.data.posts,
       profilePhoto: response.data.user.profilePhoto,
       communities: response.data.communities,
@@ -50,8 +51,20 @@ if(response.status==200){
   navigate("/profilePage");}
   else{
     navigate('/')
+  }}
+  catch(err){
+    window.location.reload(true);
+        alert(err.response.message)
   }
-        });
+        }
+        
+        );
+
+      }
+      catch(err){
+        window.location.reload(true);
+        alert(err.response.message)
+      }
       
         
       };

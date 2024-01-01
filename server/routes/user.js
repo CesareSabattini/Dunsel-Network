@@ -8,15 +8,15 @@ router.post('/signIn',(req, res)=>{
     signIn(req.body, res);
     });
 
-router.post('/logIn',logIn);
+router.post('/logIn', logIn);
 
-router.get('/:userName', getUser);
+router.get('/:userName', verifyToken, getUser);
 
-router.post('/setProfilePhoto', setProfilePhoto);
+router.post('/setProfilePhoto',verifyToken, setProfilePhoto);
 
-router.get('/getProfilePhoto', getProfilePhoto);
+router.get('/getProfilePhoto', verifyToken, getProfilePhoto);
 
-router.post('/addFollowed', addFollowed);
+router.post('/addFollowed', verifyToken, addFollowed);
 
 router.post('/description/update', updateDescription)
 

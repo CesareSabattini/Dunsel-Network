@@ -3,15 +3,18 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 
 const SignIn = () => {
+
     const navigate= useNavigate();
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
         userName:"",
-        password:""
+        password:"",
+        email:""
       });
 
       const handleChange = (e) => {
@@ -28,11 +31,17 @@ const SignIn = () => {
           firstName: data.firstName,
           lastName: data.lastName,
           userName: data.userName,
-          password: data.password
+          password: data.password,
+          email: data.email
 
         };
-        const res= await axios.post("http://localhost:3001/user/signIn", userData)
-          navigate('/logIn');
+        try{const res= await axios.post("http://localhost:3001/user/signIn", userData)
+        navigate('/logIn');
+      }catch(err){
+window.location.reload(true);
+alert(err.response.data.error)
+        }
+          
         };
 
     
@@ -53,13 +62,18 @@ initialValues={
 >
   <Form>
     <div  className='grid grid-cols-2 gap-7 mx-3'>
-   <Field type='string' name='firstName' value={data.firstName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-lg py-4' placeholder='First Name'/>
+   <Field type='string' name='firstName' value={data.firstName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-md py-4 border-y border-gray-500' placeholder='First Name'/>
  
-    <Field type='string' name='lastName' value={data.lastName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-lg py-4' placeholder='Last Name'/>
+    <Field type='string' name='lastName' value={data.lastName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-md py-4 border-y border-gray-500' placeholder='Last Name'/>
   
-    <Field type='string' name='userName' value={data.userName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-lg py-4' placeholder='Username'/>
+    <Field type='string' name='userName' value={data.userName}  onChange={handleChange} className='  mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] text-center shadow-sky-500 shadow-md py-4 border-y border-gray-500' placeholder='Username'/>
   
-    <Field type='password' name='password' value={data.password}  onChange={handleChange} className='mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] bg-transparent border-b-2 text-center shadow-sky-500 shadow-lg py-4' placeholder='Password'/>
+    <Field type='password' name='password' value={data.password}  onChange={handleChange} className='mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] bg-transparent border-b-2 text-center shadow-sky-500 shadow-md py-4 border-y border-gray-500' placeholder='Password'/>
+    
+    
+    <Field type='text' name='email' value={data.email}  onChange={handleChange} className='mb-[0.7vh] bg-transparent border-b-[2px] rounded py-[1px] bg-transparent border-b-2 text-center shadow-sky-500 shadow-md py-4 col-span-2 border-y border-gray-500' placeholder='Email'/>
+
+ 
     </div>
 <div className=' mt-10 font-bold text-2xl flex justify-center'>
     <button type="submit" className=' p-3  bg-gradient-to-b from-transparent text-white font-bold rounded-lg transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500 border-b-[2px] border-sky-500 ' >

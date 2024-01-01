@@ -12,6 +12,7 @@ const passwordHash= await bcrypt.hash(req.password, salt);
 const user= new User({
     firstName: req.firstName,
     lastName: req.lastName,
+    email: req.email,
     userName: req.userName,
     profilePhoto: '',
     password: passwordHash,

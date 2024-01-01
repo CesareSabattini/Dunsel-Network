@@ -3,19 +3,35 @@ const mongoose= require('mongoose');
 const UserSchema= new mongoose.Schema({
     firstName:{
         type: String,
-        require: true
+        required: [true,'this field is required'],
+        
     },
     lastName:{
         type: String,
-        require: true
+        required: [true,'this field is required']
+    },
+    email:{
+        type: String,
+        required: [true,'this field is required'],
+        unique: [true, 'this email has already been registered'],
+        validate: {
+            validator: function (value) {
+              return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            },
+            message: 'Invalid email address',
+          }
     },
     userName:{
         type: String,
-        require: true
+        required: [true,'this field is required'],
+        unique: [true, 'this username already exists, choose another one'],
+        maxLength: [30, 'the username is too long'],
+        minLength: [3, 'the username is too short']
     },
     password:{
         type: String,
-        require: true
+        required: [true,'this field is required']
+       
     },
     followers:{
         type: Array

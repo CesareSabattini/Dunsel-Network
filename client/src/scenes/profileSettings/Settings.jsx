@@ -14,6 +14,7 @@ import { setDescription } from '../../state/index';
 const Settings = () => {
   const navigate= useNavigate();
   const dispatch= useDispatch();
+  const token= useSelector(state=>state.token)
 
   const navigateBack= async event=>{
     event.preventDefault();
@@ -35,7 +36,11 @@ userName: user.userName,
 description: data.description
 }
 
-const res= await axios.post('http://localhost:3001/user/description/update', reqData).then((response)=>{    
+const res= await axios.post('http://localhost:3001/user/description/update', reqData,
+{headers: {
+  'Authorization': 'Bearer ' + token}
+}
+).then((response)=>{    
 console.log(response.data);
 
 navigate(`/profilePage`)

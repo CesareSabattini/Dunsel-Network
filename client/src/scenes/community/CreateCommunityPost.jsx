@@ -12,6 +12,7 @@ const CreateCommunityPost = () => {
 
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
+    const token= useSelector((state)=>state.token)
     const community= useSelector((state)=>state.searchedCommunity)
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [data, setData] = useState({
@@ -38,7 +39,13 @@ const CreateCommunityPost = () => {
     communityName: community.communityName
   }
 
-    const res= await axios.post('http://localhost:3001/community/addPost', reqData).then((response)=>{    
+    const res= await axios.post('http://localhost:3001/community/addPost', reqData,
+    {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    ).then((response)=>{    
         console.log(response.data);
         
             navigate(`/profilePage`)

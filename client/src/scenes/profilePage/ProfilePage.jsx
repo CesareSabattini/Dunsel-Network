@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const description= user.description;
-  
+  const token= useSelector((state) => state.token);
  const profilePhoto= useSelector((state)=>state.profilePhoto);
 
   const posts= useSelector((state)=>state.posts)
@@ -36,9 +36,16 @@ const ProfilePage = () => {
     if (event.key === 'Enter') {
  
       event.preventDefault();
+    
+      console.log(token)
 
      
-      const res= await axios.get(`http://localhost:3001/user/${inputUser}`)
+      const res= await axios.get(`http://localhost:3001/user/${inputUser}`,
+      {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })
 .then((response)=>{
   console.log(response.data);
   dispatch(
@@ -64,7 +71,13 @@ const ProfilePage = () => {
    const navigateHome= async event=>{
     event.preventDefault();
 
-    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`).then((response)=>{
+    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`,
+    {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    ).then((response)=>{
       console.log(response);
     dispatch(setFeedPosts({
         feedPosts: response.data
@@ -80,13 +93,23 @@ const reqData={
 }
 console.log(element._id)
 
-const res=await axios.delete(`http://localhost:3001/post/delete/${user.userName}/${element._id}`).then((response)=>{
+const res=await axios.delete(`http://localhost:3001/post/delete/${user.userName}/${element._id}`,
+{
+  headers:{
+    'Authorization': 'Bearer ' + token
+  }
+}
+).then((response)=>{
   console.log(response);
   
 
 })
 
-const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`).then((response)=>{
+const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`, {
+  headers:{
+    'Authorization': 'Bearer ' + token
+  }
+}).then((response)=>{
  console.log(response.data)
 dispatch(
     setPosts2({
@@ -103,7 +126,7 @@ grid grid-cols-6 grid-rows-4
     <div className='flex justify-center items-center col-start-1 col-span-2'>
 <ProfileImage  sx={{ fontSize: '20vh' }}/>
     </div>
-    <div  className='col-start-1 col-span-2 flex justify-center rounded-lg items-center font-mono m-4 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100'>
+    <div  className='col-start-1 col-span-2 flex justify-center rounded-lg items-center font-mono m-4 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm px-10 py-5'>
     <div>
         Firstname: {user.firstName}
         <br />

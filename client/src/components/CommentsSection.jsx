@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 export default  function CommentsSection(post) {
     const dispatch=useDispatch();
     const navigate= useNavigate();
+    const token=useSelector((state)=>state.token);
     const community= useSelector((state)=>state.searchedCommunity)
   const user= useSelector((state)=>state.user)
     const [open, setOpen] = React.useState(false);
@@ -44,6 +45,8 @@ export default  function CommentsSection(post) {
   };
 
   const handleSubmit= async()=>{
+   
+    
     
 const reqData={
 userName: user.userName,
@@ -53,12 +56,17 @@ text: data.myComment
 }
 
 
-const res= await axios.post('http://localhost:3001/community/postComment', reqData).then((response)=>{    
+const res= await axios.post('http://localhost:3001/community/postComment', reqData,{
+  headers: {
+    'Authorization': 'Bearer ' + token}
+}).then((response)=>{    
 console.log(response);
 
 })
 
-const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${community.communityName}`)
+const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${community.communityName}`,  {headers: {
+  'Authorization': 'Bearer ' + token}
+})
 .then((response)=>{
   console.log(response.data);
   dispatch(
@@ -76,7 +84,11 @@ const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${
  
 
      
-      const res= await axios.get(`http://localhost:3001/user/${clickedUser}`)
+      const res= await axios.get(`http://localhost:3001/user/${clickedUser}`,
+      {headers: {
+        'Authorization': 'Bearer ' + token}
+      }
+      )
 .then((response)=>{
   console.log(response.data);
   dispatch(
