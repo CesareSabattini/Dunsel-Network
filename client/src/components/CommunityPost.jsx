@@ -6,6 +6,7 @@ import CommentsSection from './CommentsSection';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedUser, setSearchedUserPosts } from '../state';
+import './CommunityPost.css'
 
 const CommunityPost = (post) => {
   const navigate= useNavigate();
@@ -47,7 +48,12 @@ dispatch(
       </div>
 
    <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1'>
-   Description: <div className='text-sm pl-2'>{post.post.description}</div>
+   Description: <div className='text-sm pl-2' style={{
+    wordWrap: 'break-word',
+    width: '65%'
+    
+   }}
+   >{post.post.description}</div>
     </div>
     <div className='flex justify-center'>
     

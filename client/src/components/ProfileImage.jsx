@@ -58,7 +58,7 @@ const ProfileImage = () => {
     return (
       <div {...getRootProps()} className=''>
         <input {...getInputProps()} />
-        <img src={`./src/assets/background/${profilePhoto}`} className='rounded-full h-[20vh] cursor-pointer' />
+        <img src={`./src/assets/background/${profilePhoto}`} className='rounded-full h-[17vh] cursor-pointer' />
      
      
       </div>

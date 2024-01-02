@@ -9,6 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ProfileImage from '../../components/ProfileImage'
 import HomeIcon from '@mui/icons-material/Home';
+import ResponsiveAppBar from '../../components/Navbar';
+
 
 const ProfilePage = () => {
 
@@ -120,47 +122,51 @@ posts: response.data
 })
    }
   return (
-<div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[100vh]
-grid grid-cols-6 grid-rows-4
-'>
-    <div className='flex justify-center items-center col-start-1 col-span-2'>
-<ProfileImage  sx={{ fontSize: '20vh' }}/>
-    </div>
-    <div  className='col-start-1 col-span-2 flex justify-center rounded-lg items-center font-mono m-4 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm px-10 py-5'>
     <div>
-        Firstname: {user.firstName}
-        <br />
-        Lastname: {user.lastName}
-        <br />
-        Description: {description}
-        <br />
+      <ResponsiveAppBar/>
+<div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[92vh]
+grid'>
+
+    <div  className=' col-span-7 row-start-1 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
+    <div className='grid grid-cols-2 grid-rows-2'>
+      <div className='px-5 pt-2'>
+    <ProfileImage  />
+    </div>
+  
+    <div className='flex items-center font-bold text-2xl row-start-1 col-start-2'>
+      {user.userName}
+      </div>
+ 
+<div className='row-start-2 pt-4 pl-5 overflow-hidden mr-5'>
+Description: <br />
+{description}
+</div>
+<div className='row-start-2 px-10'>
         Followers: {user.followers.length}
         <br />
         Followed: {user.followed.length}
         <br />
         Communities: {user.communities.length}
-
+</div>
     </div>
     </div>
-    <div className='col-start-1 row-start-3 col-span-2 '>
+    <div className='row-start-2 col-span-6'>
     <input     
         id="searchedUser"
         name="searchedUser"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={inputUser} type="text" placeholder="Search User" className="input mt-5 bg-black input-bordered input-info m-4 max-w-xs" />
+        value={inputUser} type="text" placeholder="Search User" className="input bg-black input-bordered input-info mx-4 max-w-xs" />
     
-    <button className='pt-4 ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
+    <button className='ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
   <AddPhotoAlternateIcon />
 </button>
-<button className=' ml-5 h-[10vh] w-[10vh] col-start-6 row-start-' onClick={navigateHome}>
+<button className=' ml-5 h-[10vh] w-[10vh] ' onClick={navigateHome}>
   <HomeIcon/>
 </button>
     </div>
-    <div className='col-start-3 row-start-1 col-span-3 flex justify-center items-center font-bold text-3xl '>
-        {user.userName}
-    </div>
-<div className='col-span-3 row-span-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-12 border border-stone-200 border-b-2 rounded'>
+  
+<div className='col-span-7 row-start-3 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
     return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' onClick={event=>{
@@ -173,19 +179,8 @@ grid grid-cols-6 grid-rows-4
 
 
 
-<div className="col-start-6 row-start-1 dropdown pt-5 pl-5">
-  <div tabIndex={0} role="button" className="btn m-1 bg-black text-white hover:bg-white hover:text-black "><MenuIcon/></div>
-  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white text-black rounded-box w-30">
-    <li><button onClick={() =>{dispatch(setLogout())
-    navigate('/logIn')}}
-    >Log out</button></li>
-    <li><button onClick={() =>{ 
-    navigate('/settings')}}>Settings</button></li>
-  </ul>
-</div>
 
-
-
+    </div>
     </div>
   )
 }

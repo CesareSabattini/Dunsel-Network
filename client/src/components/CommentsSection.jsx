@@ -138,13 +138,15 @@ initialValues={
     return <ListItem onClick={event=>{
         event.preventDefault();
     
-     }}>
+     }}
+    
+     >
 
  <div> <span onClick={async event=>{
     
     event.preventDefault();
     await handleClickUser(element.userName);
- }} className='cursor-pointer'>{element.userName}</span>: <span>{element.text}</span></div>
+ }} className='cursor-pointer'>{element.userName}</span>: <div className='break-words w-[34%] '>{element.text}</div></div>
 
         </ListItem>
 })}

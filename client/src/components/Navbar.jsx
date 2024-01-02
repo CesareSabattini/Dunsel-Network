@@ -149,7 +149,10 @@ const handleNavigateProfile= ()=>{
         <AppBar position="static" className='bg-black'>
           <Container className='bg-black' >
             <Toolbar disableGutters>
-  <Search>
+  <Search 
+  sx={{
+    width:'40%'
+  }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -161,23 +164,37 @@ const handleNavigateProfile= ()=>{
              value={inputCommunity} type="text" 
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              sx={{
+                display: { xs: 'flex' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              
+              }}
             />
           </Search>
 
               <Typography
-                variant="h5"
+                variant={"h5"}
                 noWrap
                 component="a"
                 className='justify-center'
                 sx={{
+                  
                   mr: 2,
                   display: { xs: 'flex' },
                   flexGrow: 1,
                   fontFamily: 'monospace',
                   fontWeight: 700,
+                  fontSize: {xs:20, sm:30,  md:30},
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
+                  paddingLeft: {xs:3}
+                  
                 }}
               >
                Dunsel Network
@@ -214,6 +231,11 @@ const handleNavigateProfile= ()=>{
                     </MenuItem>
                     <MenuItem key={'3'} onClick={handleNavigateHome}>
                       <Typography textAlign="center">Home</Typography>
+                    </MenuItem>
+                    <MenuItem key={'5'} onClick={(event) =>{
+                      event.preventDefault();
+                      navigate('/settings')}}>
+                      <Typography textAlign="center">Settings</Typography>
                     </MenuItem>
                     <MenuItem key={'4'} onClick={() =>{dispatch(setLogout())
     navigate('/logIn')}}>
