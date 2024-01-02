@@ -49,7 +49,7 @@ const UploadImage = () => {
     return (
       <div {...getRootProps()} className='border rounded-xl py-8 px-10 border-sky-500 text-gray-400'>
         <input {...getInputProps()} />
-        <p>Drag and drop files here or click to browse.</p>
+        <p  className='text-center'>Drag and drop files here or click to browse.</p>
         <ul>
           {uploadedFiles.map((file) => (
             <li key={file.name}>{file.name}</li>

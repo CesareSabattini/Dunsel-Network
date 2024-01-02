@@ -36,30 +36,33 @@ dispatch(
 };
   
   return (
-   <Box className='py-5 border-b'>
+   <Box className='pb-5 border-b'>
   
-    <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1 cursor-pointer'
+    <div className='font-mono flex items-center bg-sky-500 bg-clip-padding 
+    backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3
+     mx-4 rounded py-1'
     
     onClick= {event=>{
       event.preventDefault();
       handleClickUser(post.post.userName);
     }}>
-    {post.post.userName}
+    <div className=' hover:text-sky-500 duration-200 rounded cursor-pointer '>{post.post.userName}</div>
       </div>
 
-   <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1'>
-   Description: <div className='text-sm pl-2' style={{
+   <div className='font-mono bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-4 rounded py-1'>
+  <div>Description:</div>  
+   <div className='text-sm pl-2' style={{
     wordWrap: 'break-word',
-    width: '65%'
+    width: '100%'
     
    }}
    >{post.post.description}</div>
     </div>
-    <div className='flex justify-center'>
+    <div className='flex justify-center w-[100%] px-8'>
     
-    <img src={`../src/assets/background/${post.post.url}`}className='w-[60vh] rounded-lg' />
+    <img src={`../src/assets/background/${post.post.url}`} className='w-[60vh] rounded-lg ' />
   </div> 
-  <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-3 rounded py-1'>
+  <div className='font-mono flex items-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-sky-500 my-4 px-3 mx-4 rounded py-1'>
 <CommentsSection post={post.post}/>
   </div>
   </Box>

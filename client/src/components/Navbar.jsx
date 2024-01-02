@@ -18,7 +18,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import state, { setSearchedCommunity, setLogout } from '../state';
+import state, { setSearchedCommunity, setLogout, setSearchedUser, setSearchedUserPosts } from '../state';
 
 
 const settings = ['Profile'];
@@ -118,28 +118,50 @@ const handleNavigateProfile= ()=>{
     if (event.key === 'Enter') {
  
       event.preventDefault();
-
       const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`,
       {
         headers:{
           'Authorization': "Bearer " + token
         }
       })
-.then((response)=>{
-  console.log(response.data);
-  if(response.data.community===null){
-   window.location.reload(true);
+      const searchedUser= await axios.get(`http://localhost:3001/user/${inputCommunity}`,
+      {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      }).then((response)=>{
+        console.log(response.data.user.length)
+        console.log(searchedCommunity)
+        
+        if(response.data.user.length==0 && searchedCommunity.data.community==null){
+          window.location.reload(true)
+                }
+        if(response.data.user.length!==0 && searchedCommunity.data.community==null){
+          dispatch(
+            setSearchedUserPosts({
+              searchedUserPosts: response.data.posts
+            })
+          )
+           dispatch(
+            setSearchedUser({
+              searchedUser: response.data.user,
+            },  navigate(`/user/${inputCommunity}`) ))
 
-  }else{
-    dispatch(
-      setSearchedCommunity({
-        communityData: response.data.community
+        }
+        
+        if(searchedCommunity.data.community.length!==0){
+          dispatch(
+            setSearchedCommunity({
+              communityData: searchedCommunity.data.community
+            })
+          )
+          navigate(`/community/${inputCommunity}`)
+
+        }
       })
-    )
-    navigate(`/community/${inputCommunity}`)
-  }
+     
 
-})
+
 
     }
   };
@@ -151,7 +173,7 @@ const handleNavigateProfile= ()=>{
             <Toolbar disableGutters>
   <Search 
   sx={{
-    width:'40%'
+    width:'30%'
   }}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -168,8 +190,8 @@ const handleNavigateProfile= ()=>{
                 display: { xs: 'flex' },
                 flexGrow: 1,
                 fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
+                fontWeight: 900,
+                letterSpacing: '',
                 color: 'inherit',
                 textDecoration: 'none',
               
@@ -193,7 +215,7 @@ const handleNavigateProfile= ()=>{
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
-                  paddingLeft: {xs:3}
+                  paddingLeft: {xs:0}
                   
                 }}
               >
@@ -202,7 +224,7 @@ const handleNavigateProfile= ()=>{
     
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip>
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ pr: 1 }}>
                     <Avatar src={`../src/assets/background/${profilePhoto}`} />
                   </IconButton>
                 </Tooltip>
@@ -232,15 +254,23 @@ const handleNavigateProfile= ()=>{
                     <MenuItem key={'3'} onClick={handleNavigateHome}>
                       <Typography textAlign="center">Home</Typography>
                     </MenuItem>
-                    <MenuItem key={'5'} onClick={(event) =>{
+                    <MenuItem key={'4'} onClick={(event) =>{
                       event.preventDefault();
                       navigate('/settings')}}>
                       <Typography textAlign="center">Settings</Typography>
                     </MenuItem>
-                    <MenuItem key={'4'} onClick={() =>{dispatch(setLogout())
+                    <MenuItem key={'5'} onClick={() =>{dispatch(setLogout())
     navigate('/logIn')}}>
                       <Typography textAlign="center">Log Out</Typography>
                     </MenuItem>
+                    <MenuItem key={'6'} onClick={  event=>{
+    event.preventDefault();
+    navigate('/createPost');
+    console.log(user.followed);
+   }}>
+                      <Typography textAlign="center">Share a post</Typography>
+                    </MenuItem>
+                  
                 </Menu>
               </Box>
             </Toolbar>

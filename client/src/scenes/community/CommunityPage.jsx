@@ -55,7 +55,7 @@ return (
   <div className='h-[90vh]'>
 
     <div>
-{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold '
+{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold w-[90%] mx-1'
     
     onClick= {event=>{
       event.preventDefault();
@@ -63,7 +63,7 @@ return (
     }}
     >
       Add Post</button>) : (
-           <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
+           <button className='flex w-[90%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
            onClick= {async (event)=>{
              event.preventDefault();
@@ -74,7 +74,7 @@ return (
       )}
     </div>
     <div>
-{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
+{isMember ? (   <button className='flex w-[90%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
     onClick= {async event=>{
       event.preventDefault();

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { setPosts, setPosts2 } from '../../state/index';
 import { ArrowBack, Upload } from '@mui/icons-material';
 import UploadImage from '../../components/UploadImage';
+import ResponsiveAppBar from '../../components/Navbar';
 
 
 const CreatePost = () => {
@@ -74,23 +75,25 @@ posts: response
         });
       };
   return (
+    <div >
+
+  <ResponsiveAppBar/>
+  <div className='bg-gradient-to-r font-mono from-gray-700 via-gray-900 to-black text-white h-[92vh] p-[15vh] pt-[10vh]'>    
+
+<div className='rounded border-4 rounded-xl shadow-sky-500 shadow-lg border-black '>
+<h1 className='flex justify-center font-bold mt-10 text-4xl mb-5'>Create Post</h1>
+
+
   
-  <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white h-[100vh] p-[15vh] pt-[10vh]'>    
 
-<div className='flex mb-[5vh] justify-end'><button onClick={navigateBack} ><ArrowBack className='border rounded-full shadow-lg shadow-sky-500 text-sky-500'/></button></div>
-<div className='  h-full rounded border-4 rounded-2xl shadow-sky-500 shadow-xl border-gray-800  grid grid-cols-4 grid-rows-4'>
-<h1 className='flex justify-center font-bold mt-10 text-4xl col-span-4'>Create Post</h1>
-
-
-  
-
-<div className='flex items-center justify-center row-start-2 col-start-2 col-span-2 cursor-pointer '>
+<div className='flex items-center justify-center row-start-3 col-start-1 m-5 cursor-pointer '>
 
 <UploadImage/>
 </div>
 
 </div>
 
+</div>
 </div>
   )
 }

@@ -139,6 +139,7 @@ initialValues={
         event.preventDefault();
     
      }}
+     
     
      >
 
@@ -146,7 +147,7 @@ initialValues={
     
     event.preventDefault();
     await handleClickUser(element.userName);
- }} className='cursor-pointer'>{element.userName}</span>: <div className='break-words w-[34%] '>{element.text}</div></div>
+ }} className='cursor-pointer hover:text-sky-500 duration-150 bg-sky-900 p-1 rounded '>{element.userName}</span>: <div className='break-words w-[35vh] '>{element.text}</div></div>
 
         </ListItem>
 })}

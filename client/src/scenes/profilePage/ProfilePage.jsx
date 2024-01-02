@@ -11,6 +11,13 @@ import ProfileImage from '../../components/ProfileImage'
 import HomeIcon from '@mui/icons-material/Home';
 import ResponsiveAppBar from '../../components/Navbar';
 
+function DeleteButton() {
+  return (
+  
+      <button className='bg-red' >Delete</button>
+
+  );
+}
 
 const ProfilePage = () => {
 
@@ -31,7 +38,15 @@ const ProfilePage = () => {
     console.log(inputUser);
   };
 
-  
+  const [isHover, setIsHover] = useState(false);
+
+  const handleMouseEnter = () => {
+     setIsHover(true);
+  };
+  const handleMouseLeave = () => {
+     setIsHover(false);
+  };
+
 
   const handleKeyDown = async event => {
   
@@ -39,7 +54,6 @@ const ProfilePage = () => {
  
       event.preventDefault();
     
-      console.log(token)
 
      
       const res= await axios.get(`http://localhost:3001/user/${inputUser}`,
@@ -64,11 +78,7 @@ const ProfilePage = () => {
     }
   };
 
-  const createPost= async event=>{
-    event.preventDefault();
-    navigate('/createPost');
-    console.log(user.followed);
-   }
+  
 
    const navigateHome= async event=>{
     event.preventDefault();
@@ -125,11 +135,11 @@ posts: response.data
     <div>
       <ResponsiveAppBar/>
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[92vh]
-grid'>
+grid grid-rows-6'>
 
-    <div  className=' col-span-7 row-start-1 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
+    <div className='col-span-6 row-span-2 mx-4 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
     <div className='grid grid-cols-2 grid-rows-2'>
-      <div className='px-5 pt-2'>
+      <div className='pl-[20%] pt-2'>
     <ProfileImage  />
     </div>
   
@@ -137,49 +147,40 @@ grid'>
       {user.userName}
       </div>
  
-<div className='row-start-2 pt-4 pl-5 overflow-hidden mr-5'>
-Description: <br />
-{description}
-</div>
-<div className='row-start-2 px-10'>
+<div className='row-start-2 pl-[20%] pt-5'>
         Followers: {user.followers.length}
         <br />
         Followed: {user.followed.length}
         <br />
         Communities: {user.communities.length}
 </div>
+<div className='row-start-2 overflow-hidden mr-5 break-words'>
+Description: <br />
+{description}
+</div>
     </div>
     </div>
-    <div className='row-start-2 col-span-6'>
-    <input     
-        id="searchedUser"
-        name="searchedUser"
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        value={inputUser} type="text" placeholder="Search User" className="input bg-black input-bordered input-info mx-4 max-w-xs" />
-    
-    <button className='ml-5 h-[10vh] w-[10vh] ' onClick={createPost}>
-  <AddPhotoAlternateIcon />
-</button>
-<button className=' ml-5 h-[10vh] w-[10vh] ' onClick={navigateHome}>
-  <HomeIcon/>
-</button>
-    </div>
-  
-<div className='col-span-7 row-start-3 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
+   
+<div className='col-span-6 row-start-3 row-span-4 mt-2 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' onClick={event=>{
+    return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' 
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave} 
+     key={element._id}>
+        
+        <img src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' />
+      
+        {isHover && <div className='text-center text-black font-mono font-bold hover:text-white bg-red-500'
+        
+        onClick={event=>{
       event.preventDefault();
-      handlePostDelete(element)}} key={element._id}><img src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' /></div>
+      handlePostDelete(element)}}> <DeleteButton /></div>}
+      </div>
   })}
  </div>
 
 </div>
-
-
-
-
     </div>
     </div>
   )
