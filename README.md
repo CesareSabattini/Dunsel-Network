@@ -1,7 +1,7 @@
 # Dunsel-Network
 
 ## Brief Description
-Dunsel Network is a fully functional template of image-sharing, community based, social network: after a sign in process, the user is given a personal account, where he can post photos and manage profile's setting, such as description and profile image. Moreover, he can search for other user via search bar.
+Dunsel Network is a fully functional template of image-sharing, community based, social network: after a sign in process, which requires the email verification, the user is given a personal account, where he can post photos and manage profile's setting, such as description and profile image. Moreover, he can search for other user via search bar.
 
 But this social is more inclined on enhancing interactions and discussion: on the homepage the user can create his own communities and search for other ones, and join them as well. 
 
