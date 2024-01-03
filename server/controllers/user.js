@@ -1,6 +1,7 @@
 const User= require('../models/User.js');
 const bcrypt= require('bcrypt');
 const jwt= require('jsonwebtoken');
+const sendVerificationEmail = require('../utils/emailVerification.js');
 const { Post } = require('../models/Post.js');
 
 const signIn = async (req, res)=>{
@@ -16,17 +17,35 @@ const user= new User({
     userName: req.userName,
     profilePhoto: '',
     password: passwordHash,
+    isValid:false,
     followers:[],
     followed:[],
     communities:[]
 })
 const savedUser= await user.save().then(()=>console.log(user))
-res.status(201).json(user);}
+const verificationLink = `http://localhost:3001/user/verify/${req.userName}`;
+sendVerificationEmail(req.email, verificationLink);
+res.status(200).json(`Verification email has been sent to ${req.email}`)
+}
 catch(err){
     console.log(err);
     res.status(500).json({error:err.message});
 }
 }
+
+
+const validateUser= async (req, res)=>{
+    try{
+const {userName}=req.params;
+const user= await User.findOneAndUpdate({userName: userName}, {isValid: true}, {returnOriginal: true}).then((response)=>{
+    res.status(201).json(response);
+});
+}
+catch(err){
+    console.log(err);
+}
+}
+
 
 const logIn= async (req,res)=>{
     try{
@@ -35,13 +54,17 @@ const logIn= async (req,res)=>{
         const posts= await Post.find({userName: userName});
         if(!user)return res.status(400).json({msg: 'User does not exist'});
         
+        if(user.isValid===true){
         const isMatched= await bcrypt.compare(password, user.password);
         if(!isMatched)return res.status(400).json({msg: 'Invalid Password'});
         
         const token= jwt.sign({id:user._id}, process.env.JWT_SECRET);
         delete user.password;
         res.status(200).json({token, user, posts});
-        
+        }
+        else{
+            res.status(500).json('Please, verify your account first');
+        }
             }
             catch(err){
         res.status(500).json({error: err.message})
@@ -133,4 +156,4 @@ catch(err){
 }
 }
 
-module.exports= {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription};
+module.exports= {signIn, validateUser, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription};

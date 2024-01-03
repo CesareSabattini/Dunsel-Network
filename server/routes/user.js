@@ -1,7 +1,9 @@
 const express= require('express');
 const router= express.Router();
-const {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription}= require('../controllers/user')
+const {signIn, logIn, getUser, setProfilePhoto, getProfilePhoto, addFollowed, updateDescription, validateUser}= require('../controllers/user')
 const {verifyToken}= require('../middleware/auth')
+
+
 
 
 router.post('/signIn',(req, res)=>{
@@ -18,7 +20,8 @@ router.get('/getProfilePhoto', verifyToken, getProfilePhoto);
 
 router.post('/addFollowed', verifyToken, addFollowed);
 
-router.post('/description/update', updateDescription)
+router.post('/description/update', updateDescription);
 
+router.get('/verify/:userName', validateUser)
 
 module.exports= router;

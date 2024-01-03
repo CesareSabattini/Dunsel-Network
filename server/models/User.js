@@ -33,6 +33,10 @@ const UserSchema= new mongoose.Schema({
         required: [true,'this field is required']
        
     },
+    isValid:{
+        type:Boolean,
+        required:true
+    },
     followers:{
         type: Array
     },
