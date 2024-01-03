@@ -18,7 +18,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import state, { setSearchedCommunity, setLogout, setSearchedUser, setSearchedUserPosts } from '../state';
+import state, { setSearchedCommunity, setLogout, setSearchedUser, setSearchedUserPosts, setFeedPosts } from '../state';
 
 
 const settings = ['Profile'];
@@ -75,7 +75,8 @@ function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [inputCommunity, setMessage] = useState('');
     const navigate= useNavigate();
-    const token= useSelector(state=>state.token)
+    const token= useSelector(state=>state.token);
+    const user= useSelector(state=>state.user)
     const profilePhoto= useSelector((state)=>state.profilePhoto);
 const dispatch= useDispatch()
     const handleOpenUserMenu = (event) => {
@@ -89,16 +90,6 @@ const dispatch= useDispatch()
      
     };
 
-    const handleNavigateHome = (event)=>{
-
-event.preventDefault();
-if(window.location.href==='http://localhost:5173/home'){
-window.location.reload();
-}
-else{navigate('/home')}
-
-
-    }
     const handleCreateCommunity= ()=>{
       navigate('/community/create')
     }
@@ -112,7 +103,30 @@ const handleNavigateProfile= ()=>{
       console.log(inputCommunity);
     };
 
-    
+     const handleNavigateHome= async event=>{
+      
+event.preventDefault();
+if(window.location.href==='http://localhost:5173/home'){
+window.location.reload();
+}
+else{
+    event.preventDefault();
+
+    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`,
+    {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    ).then((response)=>{
+      console.log(response);
+    dispatch(setFeedPosts({
+        feedPosts: response.data
+      }))
+      navigate('/home');
+    })
+   }}
+
   const handleKeyDown = async event => {
   
     if (event.key === 'Enter') {
@@ -189,6 +203,7 @@ const handleNavigateProfile= ()=>{
               sx={{
                 display: { xs: 'flex' },
                 flexGrow: 1,
+                
                 fontFamily: 'monospace',
                 fontWeight: 900,
                 letterSpacing: '',

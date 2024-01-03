@@ -54,8 +54,8 @@ return (
 <div className='grid grid-cols-4 divide-x'>
   <div className='h-[90vh]'>
 
-    <div>
-{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold w-[90%] mx-1'
+    <div className='flex justify-center'>
+{isMember ? (   <button className='flex items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold w-[80%] mx-1'
     
     onClick= {event=>{
       event.preventDefault();
@@ -63,7 +63,7 @@ return (
     }}
     >
       Add Post</button>) : (
-           <button className='flex w-[90%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
+           <button className='flex w-[80%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
            onClick= {async (event)=>{
              event.preventDefault();
@@ -73,8 +73,8 @@ return (
              Join</button>
       )}
     </div>
-    <div>
-{isMember ? (   <button className='flex w-[90%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
+    <div className='flex justify-center'>
+{isMember ? (   <button className='flex w-[80%] mx-1 items-center justify-center bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded bg-black w-full mt-10 rounded-lg py-4 font-mono font-bold'
     
     onClick= {async event=>{
       event.preventDefault();

@@ -106,7 +106,7 @@ grid grid-rows-6
     
     </div>
 
-    <div className='col-span-3 row-span-4 mx-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-2 border border-sky-500 rounded mt-2'>
+    <div className='col-span-6 row-span-4 mx-3 gap-1 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 mb-2 border border-sky-500 rounded mt-2'>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
     return <div className='border rounded-xl border-sky-500'><img key={element.id} src={`../src/assets/background/${element.url}`} className='flex items-center rounded-xl' /></div>

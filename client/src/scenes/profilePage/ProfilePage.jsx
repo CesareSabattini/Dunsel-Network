@@ -47,57 +47,6 @@ const ProfilePage = () => {
      setIsHover(false);
   };
 
-
-  const handleKeyDown = async event => {
-  
-    if (event.key === 'Enter') {
- 
-      event.preventDefault();
-    
-
-     
-      const res= await axios.get(`http://localhost:3001/user/${inputUser}`,
-      {
-        headers:{
-          'Authorization': 'Bearer ' + token
-        }
-      })
-.then((response)=>{
-  console.log(response.data);
-  dispatch(
-    setSearchedUserPosts({
-      searchedUserPosts: response.data.posts
-    })
-  )
-   dispatch(
-    setSearchedUser({
-      searchedUser: response.data.user,
-    },  navigate(`/user/${inputUser}`) ))
-})
-
-    }
-  };
-
-  
-
-   const navigateHome= async event=>{
-    event.preventDefault();
-
-    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`,
-    {
-      headers:{
-        'Authorization': 'Bearer ' + token
-      }
-    }
-    ).then((response)=>{
-      console.log(response);
-    dispatch(setFeedPosts({
-        feedPosts: response.data
-      }))
-      navigate('/home');
-    })
-   }
-
    const handlePostDelete= async (element)=>{
 const reqData={
   userName: user.userName,
@@ -135,43 +84,43 @@ posts: response.data
     <div>
       <ResponsiveAppBar/>
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[92vh]
-grid grid-rows-6'>
+grid grid-rows-6 grid-cols-6'>
 
-    <div className='col-span-6 row-span-2 mx-4 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
-    <div className='grid grid-cols-2 grid-rows-2'>
-      <div className='pl-[20%] pt-2'>
+    <div className='col-span-6 row-span-2 md:col-span-2  md:row-span-5 mx-4 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
+    <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-2 md:grid-rows-4'>
+      <div className='pl-[20%] md:col-span-3 md:pt-0 pt-2 md:row-start-2'>
     <ProfileImage  />
     </div>
   
-    <div className='flex items-center font-bold text-2xl row-start-1 col-start-2'>
+    <div className='flex items-center font-bold text-2xl row-start-1 col-start-2 md:col-start-1 md:col-span-2 md:justify-center'>
       {user.userName}
       </div>
  
-<div className='row-start-2 pl-[20%] pt-5'>
+<div className='row-start-2 md:row-start-3 pl-[20%] pt-5 md:col-span-3'>
         Followers: {user.followers.length}
         <br />
         Followed: {user.followed.length}
         <br />
         Communities: {user.communities.length}
 </div>
-<div className='row-start-2 overflow-hidden mr-5 break-words'>
+<div className='row-start-2 md:row-start-4 md:pl-4 md:col-span-2 overflow-hidden mr-5 break-words'>
 Description: <br />
 {description}
 </div>
     </div>
     </div>
    
-<div className='col-span-6 row-start-3 row-span-4 mt-2 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
+<div className='col-span-6 row-start-3 row-span-4 md:col-span-4 md:row-span-6 mt-2 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
-    return <div className='border rounded-xl border-stone-200 hover:border-4 hover:border-red-500' 
+    return <div className='border flex bg-black rounded-xl border-stone-200 hover:border-4 hover:border-red-500 justify-center' 
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave} 
      key={element._id}>
         
         <img src={`./src/assets/background/${element.url}`} className='flex items-center rounded-xl ' />
       
-        {isHover && <div className='text-center text-black font-mono font-bold hover:text-white bg-red-500'
+        {isHover && <div className='text-center text-black font-mono font-bold hover:text-white bg-red-500 fixed px-2 w-[20%] rounded-b'
         
         onClick={event=>{
       event.preventDefault();
