@@ -3,6 +3,7 @@ const bcrypt= require('bcrypt');
 const jwt= require('jsonwebtoken');
 const sendVerificationEmail = require('../utils/emailVerification.js');
 const { Post } = require('../models/Post.js');
+var path = require('path');
 
 const signIn = async (req, res)=>{
     try{
@@ -38,7 +39,7 @@ const validateUser= async (req, res)=>{
     try{
 const {userName}=req.params;
 const user= await User.findOneAndUpdate({userName: userName}, {isValid: true}, {returnOriginal: true}).then((response)=>{
-    res.status(201).json(response);
+    res.sendFile('success.html', { root: path.join(__dirname, '../utils') })
 });
 }
 catch(err){
@@ -75,8 +76,7 @@ const logIn= async (req,res)=>{
             try{
                 const {userName}=req.params;
                 const user=await User.find({userName: userName});
-                const posts= await Post.find({userName: userName});
-                res.status(200).json({user, posts});
+                res.status(200).json({user});
             }
             catch(err){
 res.status(200).json({});

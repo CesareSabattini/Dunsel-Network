@@ -86,31 +86,31 @@ posts: response.data
 <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black text-stone-200 h-[92vh]
 grid grid-rows-6 grid-cols-6'>
 
-    <div className='col-span-6 row-span-2 md:col-span-2  md:row-span-5 mx-4 flex rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
+    <div className='col-span-6 row-span-2 md:col-span-2  md:row-span-5 mx-4 flex justify-center rounded-lg font-mono m-2 bg-sky-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-b border-sky-500 text-stone-100 text-sm '>
     <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-2 md:grid-rows-4'>
       <div className='pl-[20%] md:col-span-3 md:pt-0 pt-2 md:row-start-2'>
     <ProfileImage  />
     </div>
   
-    <div className='flex items-center font-bold text-2xl row-start-1 col-start-2 md:col-start-1 md:col-span-2 md:justify-center'>
+    <div className='flex items-center font-bold text-2xl row-start-1 col-start-2 md:col-start-1 md:col-span-2 md:justify-center lg:justify-center'>
       {user.userName}
       </div>
  
-<div className='row-start-2 md:row-start-3 pl-[20%] pt-5 md:col-span-3'>
+<div className='row-start-2 md:row-start-3 pl-[20%] text-[15px] md:text-[17px] pt-5 md:col-span-3'>
         Followers: {user.followers.length}
         <br />
         Followed: {user.followed.length}
         <br />
         Communities: {user.communities.length}
 </div>
-<div className='row-start-2 md:row-start-4 md:pl-4 md:col-span-2 overflow-hidden mr-5 break-words'>
+<div className='row-start-2 text-[15px] md:text-[17px] md:row-start-4 md:pl-4 md:col-span-2 overflow-hidden mr-5 break-words'>
 Description: <br />
 {description}
 </div>
     </div>
     </div>
    
-<div className='col-span-6 row-start-3 row-span-4 md:col-span-4 md:row-span-6 mt-2 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded '>
+<div className='col-span-6 row-start-3 row-span-4 md:col-span-4 md:row-span-6 mt-2 gap-1 mx-6 overflow-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-sky-600 border border-stone-200 border-b-2 rounded  '>
 <div className='grid grid-cols-2 col-span-3 row-span-1 gap-2 p-3'>
 {posts.map(element => {
     return <div className='border flex bg-black rounded-xl border-stone-200 hover:border-4 hover:border-red-500 justify-center' 

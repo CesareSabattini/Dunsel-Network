@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { setProfilePhoto } from '../state';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Avatar } from '@mui/material';
 
 const ProfileImage = () => {
     
@@ -58,7 +58,13 @@ const ProfileImage = () => {
     return (
       <div {...getRootProps()} className=''>
         <input {...getInputProps()} />
-        <img src={`./src/assets/background/${profilePhoto}`} className='rounded-full h-[15vh] cursor-pointer' />
+        <Avatar src={`./src/assets/background/${profilePhoto}`}
+        sx={{
+          height:'15vh',
+          width:'15vh',
+          cursor:'pointer'
+        }}
+        className='rounded-full h-[15vh] cursor-pointer' />
      
      
       </div>

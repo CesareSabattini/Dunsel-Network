@@ -5,13 +5,14 @@ import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Field } from 'formik';
 import axios from 'axios';
+import { setUser } from '../../state';
 import ResponsiveAppBar from '../../components/Navbar';
 
 const CreateCommunity = () => {
     const dispatch= useDispatch();
     const navigate= useNavigate();
     const user= useSelector((state)=>state.user);
-    const token= useSelector(state=>state.token)
+    const token= useSelector(state=>state.token);
     const [data, setData] = useState({
         communityName:"",
         communityTheme:"",
@@ -43,8 +44,24 @@ const res= await axios.post('http://localhost:3001/community/create', communityD
 ).then((response)=>{    
 console.log(response.data);
 
-    navigate(`/home`)
-})
+});
+const updatedUser=await axios.get(`http://localhost:3001/user/${user.userName}`,{
+  headers:{
+    'Authorization': "Bearer " + token
+  }
+}).then(
+ 
+(response)=>{
+  console.log(response) 
+  dispatch(setUser({
+    user: response.data.user[0]
+  }));
+
+  navigate(`/home`)
+}
+
+)
+
 
     }
 
