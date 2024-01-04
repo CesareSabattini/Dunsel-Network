@@ -9,7 +9,7 @@ import CreatePost from './scenes/createPost/CreatePost';
 import NullUser from './scenes/nullUser/NullUser';
 import LandingPage from './scenes/landingPage/LandingPage';
 import HomePage from './scenes/homepage/HomePage';
-import CreateCommunity from './scenes/community/createCommunity';
+import CreateCommunity from './scenes/community/CreateCommunity';
 import CommunityPage from './scenes/community/CommunityPage';
 import CreateCommunityPost from './scenes/community/CreateCommunityPost';
 
