@@ -16,7 +16,7 @@ const token= useSelector(state=>state.token)
 const handleJoinCommunity= async ()=>{
   const data={}
 
-const res= await axios.post(`http://localhost:3001/community/${user.userName}/addTo/${community.communityName}`,data,
+const res= await axios.post(`https://dunsel-network-server.vercel.app/community/${user.userName}/addTo/${community.communityName}`,data,
 {
   headers:{
     'Authorization': "Bearer " + token
@@ -32,7 +32,7 @@ const res= await axios.post(`http://localhost:3001/community/${user.userName}/ad
 
 const handleLeaveCommunity= async ()=>{
 
-  const res= await axios.post(`http://localhost:3001/community/${user.userName}/leaves/${community.communityName}`,
+  const res= await axios.post(`https://dunsel-network-server.vercel.app/community/${user.userName}/leaves/${community.communityName}`,
   {},
   {
     headers:{

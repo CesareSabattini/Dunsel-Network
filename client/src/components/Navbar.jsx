@@ -112,7 +112,7 @@ window.location.reload();
 else{
     event.preventDefault();
 
-    const feedPosts= await axios.get(`http://localhost:3001/community/getFeedPosts/${user.userName}`,
+    const feedPosts= await axios.get(`https://dunsel-network-server.vercel.app/community/getFeedPosts/${user.userName}`,
     {
       headers:{
         'Authorization': 'Bearer ' + token
@@ -132,13 +132,13 @@ else{
     if (event.key === 'Enter') {
  
       event.preventDefault();
-      const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${inputCommunity}`,
+      const searchedCommunity= await axios.get(`https://dunsel-network-server.vercel.app/community/get/${inputCommunity}`,
       {
         headers:{
           'Authorization': "Bearer " + token
         }
       })
-      const searchedUser= await axios.get(`http://localhost:3001/user/${inputCommunity}`,
+      const searchedUser= await axios.get(`https://dunsel-network-server.vercel.app/user/${inputCommunity}`,
       {
         headers:{
           'Authorization': 'Bearer ' + token

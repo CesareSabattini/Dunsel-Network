@@ -28,7 +28,7 @@ const HomePage = () => {
   const handleSearchCommunity= async (elem)=>{
 
   
-    const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${elem.communityName}`,
+    const searchedCommunity= await axios.get(`https://dunsel-network-server.vercel.app/community/get/${elem.communityName}`,
     {
       headers: {
       'Authorization': 'Bearer ' + token

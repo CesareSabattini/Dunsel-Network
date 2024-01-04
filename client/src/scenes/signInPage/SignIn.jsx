@@ -35,7 +35,7 @@ const SignIn = () => {
           email: data.email
 
         };
-        try{const res= await axios.post("http://localhost:3001/user/signIn", userData)
+        try{const res= await axios.post("https://dunsel-network-server.vercel.app/user/signIn", userData)
         navigate('/logIn');
       }catch(err){
 window.location.reload(true);

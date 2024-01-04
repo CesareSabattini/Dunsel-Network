@@ -35,7 +35,7 @@ const communityData={
     communityDescription: data.communityDescription
 }
 
-const res= await axios.post('http://localhost:3001/community/create', communityData,
+const res= await axios.post('https://dunsel-network-server.vercel.app/community/create', communityData,
 {
   headers:{
     'Authorization': "Bearer " + token
@@ -45,7 +45,7 @@ const res= await axios.post('http://localhost:3001/community/create', communityD
 console.log(response.data);
 
 });
-const updatedUser=await axios.get(`http://localhost:3001/user/${user.userName}`,{
+const updatedUser=await axios.get(`https://dunsel-network-server.vercel.app/user/${user.userName}`,{
   headers:{
     'Authorization': "Bearer " + token
   }

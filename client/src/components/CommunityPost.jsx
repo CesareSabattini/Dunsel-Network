@@ -14,7 +14,7 @@ const CommunityPost = (post) => {
   const token= useSelector(state=>state.token)
 
   const handleClickUser = async (clickedUser) => {
-    const res= await axios.get(`http://localhost:3001/user/${clickedUser}`,
+    const res= await axios.get(`https://dunsel-network-server.vercel.app/user/${clickedUser}`,
     {headers: {
       'Authorization': 'Bearer ' + token}
     }

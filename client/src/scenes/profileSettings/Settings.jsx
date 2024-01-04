@@ -37,7 +37,7 @@ userName: user.userName,
 description: data.description
 }
 
-const res= await axios.post('http://localhost:3001/user/description/update', reqData,
+const res= await axios.post('https://dunsel-network-server.vercel.app/user/description/update', reqData,
 {headers: {
   'Authorization': 'Bearer ' + token}
 }

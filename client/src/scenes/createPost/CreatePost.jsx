@@ -38,7 +38,7 @@ const postData={
     url: data.url
 }
 
-const res= await axios.post('http://localhost:3001/post/create', postData, 
+const res= await axios.post('https://dunsel-network-server.vercel.app/post/create', postData, 
 {
   headers:{
     'Authorization': 'Bearer ' + token
@@ -49,7 +49,7 @@ console.log(response.data);
 
 })
 
-const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`,
+const posts=await axios.get(`https://dunsel-network-server.vercel.app/post/get/${user.userName}`,
 {
   headers:{
     'Authorization': 'Bearer ' + token

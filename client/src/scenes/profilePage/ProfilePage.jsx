@@ -54,7 +54,7 @@ const reqData={
 }
 console.log(element._id)
 
-const res=await axios.delete(`http://localhost:3001/post/delete/${user.userName}/${element._id}`,
+const res=await axios.delete(`https://dunsel-network-server.vercel.app/post/delete/${user.userName}/${element._id}`,
 {
   headers:{
     'Authorization': 'Bearer ' + token
@@ -66,7 +66,7 @@ const res=await axios.delete(`http://localhost:3001/post/delete/${user.userName}
 
 })
 
-const posts=await axios.get(`http://localhost:3001/post/get/${user.userName}`, {
+const posts=await axios.get(`https://dunsel-network-server.vercel.app/post/get/${user.userName}`, {
   headers:{
     'Authorization': 'Bearer ' + token
   }

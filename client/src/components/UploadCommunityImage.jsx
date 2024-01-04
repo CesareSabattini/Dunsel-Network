@@ -33,7 +33,7 @@ const UploadCommunityImage = () => {
         communityName: community.communityName
       }
 
-        const res= await axios.post('http://localhost:3001/community/addPost', reqData,
+        const res= await axios.post('https://dunsel-network-server.vercel.app/community/addPost', reqData,
         {
           headers:{
             'Authorization': "Bearer " + token

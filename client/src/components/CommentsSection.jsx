@@ -56,7 +56,7 @@ text: data.myComment
 }
 
 
-const res= await axios.post('http://localhost:3001/community/postComment', reqData,{
+const res= await axios.post('https://dunsel-network-server.vercel.app/community/postComment', reqData,{
   headers: {
     'Authorization': 'Bearer ' + token}
 }).then((response)=>{    
@@ -64,7 +64,7 @@ console.log(response);
 
 })
 
-const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${community.communityName}`,  {headers: {
+const searchedCommunity= await axios.get(`https://dunsel-network-server.vercel.app/community/get/${community.communityName}`,  {headers: {
   'Authorization': 'Bearer ' + token}
 })
 .then((response)=>{
@@ -84,7 +84,7 @@ const searchedCommunity= await axios.get(`http://localhost:3001/community/get/${
  
 
      
-      const res= await axios.get(`http://localhost:3001/user/${clickedUser}`,
+      const res= await axios.get(`https://dunsel-network-server.vercel.app/user/${clickedUser}`,
       {headers: {
         'Authorization': 'Bearer ' + token}
       }

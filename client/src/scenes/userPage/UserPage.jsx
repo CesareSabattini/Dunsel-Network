@@ -30,7 +30,7 @@ const token= useSelector(state=>state.token)
         followedName: searchedUser[0].userName
       }
 
-     await axios.post('http://localhost:3001/user/addFollowed', reqData,
+     await axios.post('https://dunsel-network-server.vercel.app/user/addFollowed', reqData,
      
      {
       headers:{
@@ -51,7 +51,7 @@ const token= useSelector(state=>state.token)
 }
     })
 
-   await axios.get(`http://localhost:3001/user/${user.userName}`,
+   await axios.get(`https://dunsel-network-server.vercel.app/user/${user.userName}`,
    {
     headers:{
       'Authorization': "Bearer " + token

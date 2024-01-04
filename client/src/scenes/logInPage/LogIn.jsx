@@ -33,7 +33,7 @@ const LogIn = () => {
 
       };
 try{
-      axios.post("http://localhost:3001/user/logIn", userData).then((response) => {
+      axios.post("https://dunsel-network-server.vercel.app/user/logIn", userData).then((response) => {
        try{  
       console.log(response.data.token);
           
