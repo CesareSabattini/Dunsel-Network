@@ -24,7 +24,7 @@ const user= new User({
     communities:[]
 })
 const savedUser= await user.save().then(()=>console.log(user))
-const verificationLink = `http://localhost:3001/user/verify/${req.userName}`;
+const verificationLink = `https://dunsel-network-server.vercel.app/user/verify/${req.userName}`;
 sendVerificationEmail(req.email, verificationLink);
 res.status(200).json(`Verification email has been sent to ${req.email}`)
 }
