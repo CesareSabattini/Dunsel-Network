@@ -13,7 +13,7 @@ const cors=require('cors');
 const app= express();
 
 app.use(cors({
-    origin:["https://dunsel-network-hlo0rfcz9-cesare-sabattini-manginellas-projects.vercel.app/"],
+    origin:["https://dunsel-network.vercel.app/"],
     methods:["POST", "GET", "DELETE"],
     credentials: true
 }))
