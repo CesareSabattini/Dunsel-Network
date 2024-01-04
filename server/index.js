@@ -11,6 +11,12 @@ const cors=require('cors');
 
 
 const app= express();
+
+app.use(cors({
+    origin:["https://dunsel-network-server.vercel.app"],
+    methods:["POST", "GET", "DELETE"],
+    credentials: true
+}))
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: 'cross-origin'}));
