@@ -50,6 +50,7 @@ catch(err){
 
 const logIn= async (req,res)=>{
     try{
+        console.log(req);
         const {userName, password}= req.body;
         const user= await User.findOne({userName:userName});
         const posts= await Post.find({userName: userName});
