@@ -17,7 +17,7 @@ app.use(cors(
     origin:["https://dunsel-network-front.vercel.app"],
     methods:["POST", "GET", "DELETE"],
     credentials: true,
-    allowedHeaders:['Access-Control-Allow-Origin' ]
+    allowedHeaders:'Access-Control-Allow-Origin' 
       
 }
 ))
