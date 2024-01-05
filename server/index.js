@@ -14,7 +14,7 @@ const app= express();
 
 app.use(cors(
     {
-    origin:["https://dunsel-network.vercel.app"],
+    origin:["https://dunsel-network-front.vercel.app/logIn"],
     methods:["POST", "GET", "DELETE"],
     credentials: true,
     allowedHeaders:[
