@@ -6,6 +6,13 @@
         "use": "@vercel/node"
       }
     ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "./index.js"
+          
+      }
+    ],
     "headers": [
       {
         "source": "https://dunsel-network.vercel.app",
