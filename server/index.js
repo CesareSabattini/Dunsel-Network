@@ -12,11 +12,7 @@ const cors=require('cors');
 
 const app= express();
 
-app.use(cors({
-    origin:["https://dunsel-network.vercel.app"],
-    methods:["POST", "GET", "DELETE"],
-    credentials:true
-}))
+app.use(cors())
 
 app.get('/', (req,res)=>{
 res.json('Hello')
